@@ -1,35 +1,34 @@
 "use client";
 
 import React from "react";
-// 1. Update this import
 import { ArrowRight01Icon } from "hugeicons-react";
 
 const What = () => {
   return (
-    <div className="max-w-6xl mx-auto border-x border-t-0 border-b border-zinc-200 bg-white font-sans">
+    <div className="max-w-6xl mx-auto border-x border-t-0 border-b border-zinc-200 bg-white font-sans max-md:border-x-0">
       {/* Top Header Bar */}
-      <div className="flex justify-between items-center px-8 py-4 border-b border-t-0 border-zinc-200 text-xs font-mono text-zinc-500 tracking-widest uppercase sticky top-[64px] z-45 bg-[#FAFAFA]">
+      <div className="flex justify-between items-center px-8 py-4 border-b border-t-0 border-zinc-200 text-xs font-mono text-zinc-500 tracking-widest uppercase sticky top-[64px] z-45 bg-[#FAFAFA] max-md:px-4 max-md:py-3">
         <div>WHAT WE DO</div>
         <div>
           [<span className="text-blue-500">1</span>/4]
         </div>
       </div>
 
-      <div className="text-center px-6 pt-24 pb-16 max-w-4xl mx-auto">
-        {/* 2. Update this wrapper to flex for proper alignment */}
-        <div className="flex items-center justify-center gap-1.5 text-sm text-zinc-500 leading-relaxed mb-4 group-hover:underline cursor-pointer w-max mx-auto">
-          Explore internal agent <ArrowRight01Icon size={18} />
+      <div className="text-center px-6 pt-24 pb-16 max-w-4xl mx-auto max-md:pt-12 max-md:pb-8 max-md:px-4">
+        <div className="flex items-center justify-center gap-1.5 text-sm text-zinc-500 leading-relaxed mb-4 group-hover:underline cursor-pointer w-max mx-auto max-sm:text-xs">
+          Check out drafting app{" "}
+          <ArrowRight01Icon size={18} className="max-sm:w-4 max-sm:h-4" />
         </div>
-        <h2 className="text-4xl font-medium text-zinc-900 tracking-tight mb-4 leading-tight">
-          AI builds your customer agent in hours
+        <h2 className="text-4xl font-medium text-zinc-900 tracking-tight mb-4 leading-tight max-sm:text-3xl max-sm:leading-snug max-sm:px-2">
+          It catches every forgotten text you miss
         </h2>
       </div>
 
       {/* Split Content Area */}
-      <div className="px-8 pb-24">
-        <div className="bg-[#FAFAFA] rounded-2xl border border-zinc-100 flex flex-col md:flex-row overflow-hidden min-h-[500px]">
+      <div className="px-8 pb-24 max-md:px-4 max-md:pb-12">
+        <div className="bg-[#FAFAFA] rounded-2xl border border-zinc-100 flex flex-col md:flex-row overflow-hidden min-h-[500px] max-md:min-h-0">
           {/* Left Side: Mock UI on Blue Background */}
-          <div className="w-full md:w-[45%] p-6 flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-[#80b1ff] to-[#d6e5ff]">
+          <div className="w-full md:w-[45%] p-6 flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-[#80b1ff] to-[#d6e5ff] max-md:py-10 max-md:p-4">
             {/* Optional subtle grid overlay to mimic the image texture */}
             <div
               className="absolute inset-0 opacity-20 mix-blend-overlay"
@@ -41,14 +40,16 @@ const What = () => {
             ></div>
 
             {/* Mock UI Card */}
-            <div className="bg-white rounded-xl shadow-sm w-full max-w-[340px] p-5 relative z-10 font-sans text-sm border border-white/50">
-              <h3 className="font-medium text-zinc-900 mb-4">Connect</h3>
+            <div className="bg-white rounded-xl shadow-sm w-full max-w-[340px] p-5 relative z-10 font-sans text-sm border border-white/50 max-md:p-4">
+              <h3 className="font-medium text-zinc-900 mb-4 max-md:mb-3">
+                Sources
+              </h3>
 
-              <div className="space-y-4">
+              <div className="space-y-4 max-md:space-y-3">
                 {/* Knowledge Sources */}
                 <div>
                   <p className="text-xs text-zinc-600 mb-2">
-                    Knowledge sources
+                    Communication app
                   </p>
                   <div className="space-y-2">
                     <div className="flex items-center justify-between p-2 rounded-lg border border-zinc-200 bg-white hover:bg-zinc-50 transition-colors cursor-pointer text-xs">
@@ -58,12 +59,12 @@ const What = () => {
                           height="14"
                           viewBox="0 0 24 24"
                           fill="currentColor"
-                          className="text-zinc-800"
+                          className="text-zinc-800 shrink-0"
                         >
                           <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
                         </svg>
                         <span className="font-medium text-zinc-700">
-                          .replit-prod
+                          whatsapp-web
                         </span>
                       </div>
                       <svg
@@ -73,7 +74,7 @@ const What = () => {
                         fill="none"
                         stroke="currentColor"
                         strokeWidth="2"
-                        className="text-zinc-400"
+                        className="text-zinc-400 shrink-0"
                       >
                         <path d="M6 9l6 6 6-6" />
                       </svg>
@@ -81,13 +82,13 @@ const What = () => {
 
                     <div className="flex items-center justify-between p-2 rounded-lg border border-zinc-200 bg-white hover:bg-zinc-50 transition-colors cursor-pointer text-xs">
                       <div className="flex items-center gap-2">
-                        <div className="w-[14px] h-[14px] bg-[#03363D] text-white rounded-full flex items-center justify-center text-[8px] font-bold">
+                        <div className="w-[14px] h-[14px] bg-[#03363D] text-white rounded-full flex items-center justify-center text-[8px] font-bold shrink-0">
                           z
                         </div>
-                        <span className="font-medium text-zinc-700">
-                          Zendesk tickets{" "}
+                        <span className="font-medium text-zinc-700 flex flex-wrap gap-x-1">
+                          Gmail inboxes{" "}
                           <span className="text-zinc-400 font-normal">
-                            6712 results (after filters)
+                            1432 threads (needs replies)
                           </span>
                         </span>
                       </div>
@@ -98,7 +99,7 @@ const What = () => {
                         fill="none"
                         stroke="currentColor"
                         strokeWidth="2"
-                        className="text-zinc-400"
+                        className="text-zinc-400 shrink-0"
                       >
                         <path d="M6 9l6 6 6-6" />
                       </svg>
@@ -106,13 +107,13 @@ const What = () => {
 
                     <div className="flex items-center justify-between p-2 rounded-lg border border-zinc-200 bg-white hover:bg-zinc-50 transition-colors cursor-pointer text-xs">
                       <div className="flex items-center gap-2">
-                        <div className="w-[14px] h-[14px] border border-zinc-300 rounded flex items-center justify-center text-zinc-500 text-[8px] font-bold bg-zinc-50">
-                          N
+                        <div className="w-[14px] h-[14px] border border-zinc-300 rounded flex items-center justify-center text-zinc-500 text-[8px] font-bold bg-zinc-50 shrink-0">
+                          C
                         </div>
                         <span className="font-medium text-zinc-700">
-                          Replit{" "}
+                          G-Cals{" "}
                           <span className="text-zinc-400 font-normal">
-                            12 pages
+                            12 meets
                           </span>
                         </span>
                       </div>
@@ -123,7 +124,7 @@ const What = () => {
                         fill="none"
                         stroke="currentColor"
                         strokeWidth="2"
-                        className="text-zinc-400"
+                        className="text-zinc-400 shrink-0"
                       >
                         <path d="M6 9l6 6 6-6" />
                       </svg>
@@ -131,7 +132,7 @@ const What = () => {
 
                     <div className="flex items-center justify-between p-2 rounded-lg border border-zinc-200 bg-white hover:bg-zinc-50 transition-colors cursor-pointer text-xs">
                       <div className="flex items-center gap-2">
-                        <div className="w-[14px] h-[14px] flex flex-col justify-between items-center py-0.5">
+                        <div className="w-[14px] h-[14px] flex flex-col justify-between items-center py-0.5 shrink-0">
                           <div className="w-1 h-1 bg-[#F26207] rounded-sm"></div>
                           <div className="flex gap-0.5">
                             <div className="w-1 h-1 bg-[#F26207] rounded-sm"></div>
@@ -139,9 +140,9 @@ const What = () => {
                           </div>
                         </div>
                         <span className="font-medium text-zinc-700">
-                          docs.replit.com{" "}
+                          slack-workspaces{" "}
                           <span className="text-zinc-400 font-normal">
-                            251 subpages
+                            251 channels
                           </span>
                         </span>
                       </div>
@@ -152,13 +153,13 @@ const What = () => {
                         fill="none"
                         stroke="currentColor"
                         strokeWidth="2"
-                        className="text-zinc-400"
+                        className="text-zinc-400 shrink-0"
                       >
                         <path d="M6 9l6 6 6-6" />
                       </svg>
                     </div>
 
-                    <button className="flex items-center gap-2 w-full p-2 rounded-lg border border-dashed border-zinc-300 text-zinc-500 hover:text-zinc-700 hover:border-zinc-400 transition-colors text-xs font-medium">
+                    <button className="flex items-center justify-center gap-2 w-full p-2 rounded-lg border border-dashed border-zinc-300 text-zinc-500 hover:text-zinc-700 hover:border-zinc-400 transition-colors text-xs font-medium">
                       <svg
                         width="12"
                         height="12"
@@ -166,6 +167,7 @@ const What = () => {
                         fill="none"
                         stroke="currentColor"
                         strokeWidth="2"
+                        className="shrink-0"
                       >
                         <path d="M12 5v14M5 12h14" />
                       </svg>
@@ -176,15 +178,15 @@ const What = () => {
 
                 {/* Tools */}
                 <div>
-                  <p className="text-xs text-zinc-600 mb-2">Tools</p>
+                  <p className="text-xs text-zinc-600 mb-2">Syncs</p>
                   <div className="space-y-2">
                     <div className="flex items-center justify-between p-2 rounded-lg border border-zinc-200 bg-white hover:bg-zinc-50 transition-colors cursor-pointer text-xs">
                       <div className="flex items-center gap-2">
-                        <div className="w-[14px] h-[14px] bg-[#03363D] text-white rounded-full flex items-center justify-center text-[8px] font-bold">
-                          z
+                        <div className="w-[14px] h-[14px] bg-[#03363D] text-white rounded-full flex items-center justify-center text-[8px] font-bold shrink-0">
+                          o
                         </div>
                         <span className="font-medium text-zinc-700">
-                          Zendesk
+                          Outlook
                         </span>
                       </div>
                       <svg
@@ -194,7 +196,7 @@ const What = () => {
                         fill="none"
                         stroke="currentColor"
                         strokeWidth="2"
-                        className="text-zinc-400"
+                        className="text-zinc-400 shrink-0"
                       >
                         <path d="M6 9l6 6 6-6" />
                       </svg>
@@ -202,11 +204,11 @@ const What = () => {
 
                     <div className="flex items-center justify-between p-2 rounded-lg border border-zinc-200 bg-white hover:bg-zinc-50 transition-colors cursor-pointer text-xs">
                       <div className="flex items-center gap-2">
-                        <div className="w-[14px] h-[14px] bg-[#635BFF] text-white rounded-full flex items-center justify-center text-[8px] font-bold italic">
-                          s
+                        <div className="w-[14px] h-[14px] bg-[#635BFF] text-white rounded-full flex items-center justify-center text-[8px] font-bold italic shrink-0">
+                          n
                         </div>
                         <span className="font-medium text-zinc-700">
-                          Stripe
+                          Notion
                         </span>
                       </div>
                       <svg
@@ -216,13 +218,13 @@ const What = () => {
                         fill="none"
                         stroke="currentColor"
                         strokeWidth="2"
-                        className="text-zinc-400"
+                        className="text-zinc-400 shrink-0"
                       >
                         <path d="M6 9l6 6 6-6" />
                       </svg>
                     </div>
 
-                    <button className="flex items-center gap-2 w-full p-2 rounded-lg border border-dashed border-zinc-300 text-zinc-500 hover:text-zinc-700 hover:border-zinc-400 transition-colors text-xs font-medium">
+                    <button className="flex items-center justify-center gap-2 w-full p-2 rounded-lg border border-dashed border-zinc-300 text-zinc-500 hover:text-zinc-700 hover:border-zinc-400 transition-colors text-xs font-medium">
                       <svg
                         width="12"
                         height="12"
@@ -230,6 +232,7 @@ const What = () => {
                         fill="none"
                         stroke="currentColor"
                         strokeWidth="2"
+                        className="shrink-0"
                       >
                         <path d="M12 5v14M5 12h14" />
                       </svg>
@@ -240,7 +243,7 @@ const What = () => {
               </div>
 
               <div className="mt-4 flex justify-end">
-                <button className="bg-[#18181A] text-white text-xs font-medium px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-zinc-800 transition-colors">
+                <button className="bg-[#18181A] text-white text-xs font-medium px-4 py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-zinc-800 transition-colors max-sm:w-full">
                   <svg
                     width="12"
                     height="12"
@@ -250,46 +253,47 @@ const What = () => {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
+                    className="shrink-0"
                   >
                     <path d="m12 3-1.9 5.8a2 2 0 0 1-1.287 1.288L3 12l5.8 1.9a2 2 0 0 1 1.288 1.287L12 21l1.9-5.8a2 2 0 0 1 1.287-1.288L21 12l-5.8-1.9a2 2 0 0 1-1.288-1.287Z" />
                   </svg>
-                  Build
+                  Track
                 </button>
               </div>
             </div>
           </div>
 
           {/* Right Side: Text Steps */}
-          <div className="w-full md:w-[55%] p-10 md:p-14 flex flex-col justify-center gap-8">
+          <div className="w-full md:w-[55%] p-10 md:p-14 flex flex-col justify-center gap-8 max-md:p-6 max-md:gap-6 bg-white">
             {/* Step 1 (Active) */}
-            <div className="border-b border-zinc-800 pb-8">
-              <h3 className="text-xl md:text-2xl font-medium text-zinc-900 mb-3">
-                Day 1: AI builds your customer agent
+            <div className="border-b border-zinc-800 pb-8 max-md:pb-5">
+              <h3 className="text-xl md:text-2xl font-medium text-zinc-900 mb-3 max-md:text-lg max-md:mb-2">
+                Step 1: Shram links to your chat apps
               </h3>
               <p className="text-zinc-500 leading-relaxed text-sm md:text-base">
-                Connect your knowledge sources and tools, and AI builds your
-                customer agent.
+                Link up your daily chat apps and tools, and Shram builds your
+                memory system.
               </p>
             </div>
 
             {/* Step 2 (Inactive) */}
-            <div className="border-b border-zinc-200 pb-8 opacity-60">
-              <h3 className="text-xl md:text-2xl font-medium text-zinc-400 mb-3">
-                Day 2: Review its configurations
+            <div className="border-b border-zinc-200 pb-8 opacity-60 max-md:pb-5">
+              <h3 className="text-xl md:text-2xl font-medium text-zinc-400 mb-3 max-md:text-lg max-md:mb-2">
+                Step 2: You forgot to text back.
               </h3>
               <p className="text-zinc-400 leading-relaxed text-sm md:text-base">
-                Review and refine your customer agent's configurations by
-                chatting with AI.
+                Shram runs silently in the background and notices when a
+                conversation dies.
               </p>
             </div>
 
             {/* Step 3 (Inactive) */}
             <div className="opacity-60">
-              <h3 className="text-xl md:text-2xl font-medium text-zinc-400 mb-3">
-                Day 3: Activate it
+              <h3 className="text-xl md:text-2xl font-medium text-zinc-400 mb-3 max-md:text-lg max-md:mb-2">
+                Step 3: Shram acts
               </h3>
               <p className="text-zinc-400 leading-relaxed text-sm md:text-base">
-                Activate your customer agent across your channels.
+                It flags the cold chat and drafts a perfect reply.
               </p>
             </div>
           </div>

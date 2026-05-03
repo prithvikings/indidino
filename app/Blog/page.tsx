@@ -7,150 +7,150 @@ import { Navbar } from "../components/Navbar";
 // Mock data extracted from the provided screenshots
 const filterCategories = [
   "All",
-  "Featured",
-  "Engineering",
-  "Case Study",
+  "Showcase",
+  "Product Ops",
+  "Client Win",
   "News",
-  "Learning",
+  "Insights",
 ];
 
 const textOnlyPosts = [
   {
     category: "NEWS",
     title:
-      "Empowering the Next Generation of Founders: Shramai Startup Program",
+      "Empowering the Next Generation of Agencies: Shramai Partner Program",
     excerpt:
-      "If there’s one thing we’ve learned while building Shramai, it’s that most...",
+      "If there’s one thing we’ve learned while building Shramai, it’s that busy...",
     date: "31 Dec 2025",
   },
   {
     category: "NEWS",
-    title: "Shramai raises $3 million with the best memory engine for LLMs",
+    title: "Shramai raises $3 million with the best memory engine for task",
     excerpt:
-      "Today, I am excited to announce our first funding round to accelerate our mission...",
+      "Today, I am excited to announce our first funding round to accelerate our product...",
     date: "06 Oct 2025",
   },
   {
-    category: "CASE STUDY",
-    title: "Mem0 vs Shramai: Why Scira AI Switched And What’s Better For You?",
+    category: "CLIENT WIN",
+    title: "Task vs Shramai: Why Scale AI Switched And What’s Better For You?",
     excerpt:
-      "“Mem0 was not great. Glad to have found Shramai” That’s how Zaid...",
+      "“Task was not great. Glad to have found Shramai” That’s how Zaid...",
     date: "02 Oct 2025",
   },
   {
-    category: "ENGINEERING",
-    title: "Architecting a memory engine inspired by the human brain",
+    category: "PRODUCT OPS",
+    title: "Architecting a memory engine inspired by the busy agency",
     excerpt:
-      "Language is at the heart of intelligence, but what truly powers meaningful...",
+      "Tracking is at the heart of productivity, but what truly powers meaningful...",
     date: "05 Jun 2025",
   },
 ];
 
 const featuredPost = {
-  category: "ENGINEERING",
-  title: "Introducing @shramai/tools v2.0.0",
+  category: "PRODUCT OPS",
+  title: "Introducing @shramai/syncs v2.0.0",
   excerpt:
-    "Today we're releasing v2.0.0. This release unifies the API across all agents sdk integrations from AI SDK to Mastra, makes conversation identity a first-class concept, and ships with...",
+    "Today we're releasing v2.0.0. This release unifies the app across all tracking sdk integrations from AI CRM to Notion, makes conversation identity a first-class concept, and ships with...",
   date: "27 Apr 2026 · 5 min read",
   gradient: "from-blue-50 to-white",
 };
 
 const imagePosts = [
   {
-    category: "ENGINEERING",
-    title: "Switching Memory Infrastructure",
+    category: "PRODUCT OPS",
+    title: "Switching Tasker Infrastructure",
     excerpt:
-      "Most teams don’t even consider switching memory infrastructure. And it’s not because of...",
+      "Most teams don’t even consider switching tasker infrastructure. And it’s not because of...",
     date: "09 Apr 2026 · 3 min read",
     gradient: "from-blue-100 to-indigo-50",
   },
   {
-    category: "ENGINEERING",
-    title: "Shramai will make your Hermes-agent crazy powerful",
+    category: "PRODUCT OPS",
+    title: "Shramai will make your Slack channel crazy powerful",
     excerpt:
-      "Today, we are launching Shramai support to your Hermes agent TLDR: you can use...",
+      "Today, we are launching Shramai support to your Slack channel TLDR: you can use...",
     date: "07 Apr 2026 · 6 min read",
     gradient: "from-zinc-900 to-zinc-800",
   },
   {
-    category: "ENGINEERING",
-    title: "Solving the Precision-Recall Tradeoff: Search Result Aggregation",
+    category: "PRODUCT OPS",
+    title: "Solving the Precision-Recall Tradeoff: Thread Result Aggregation",
     excerpt:
-      "When you're building memory for AI, search is your foundational layer. The way search generally work...",
+      "When you're building memory for AI, thread is your foundational layer. The way thread generally work...",
     date: "07 Apr 2026 · 3 min read",
     gradient: "from-zinc-900 to-black",
   },
   {
     category: "NEWS",
-    title: "We broke the frontier in agent memory: To prove a point.",
+    title: "We broke the frontier in chats memory: To prove a point.",
     excerpt:
       "Read the follow up here! https://x.com/DhravyaShah/status/20362439955...",
     date: "22 Mar 2026 · 5 min read",
     gradient: "from-blue-600 to-indigo-700",
   },
   {
-    category: "ENGINEERING",
-    title: "Infinitely running stateful coding agents",
+    category: "PRODUCT OPS",
+    title: "Infinitely running stateful agency setups",
     excerpt:
-      "We built a plugin for Claude Code and OpenCode that gives your coding agent persistent memory. I...",
+      "We built a plugin for WhatsApp Web and Telegrams that gives your agency setup persistent memory. I...",
     date: "19 Feb 2026 · 5 min read",
     gradient: "from-blue-500 to-blue-400",
   },
   {
     category: "NEWS",
     title:
-      "Why everyone is complaining about OpenClaw's memory (it sucks) - and...",
+      "Why everyone is complaining about Zapier Bot's memory (it sucks) - and...",
     excerpt:
-      "TLDR: Today, we are releasing a new version of our openclaw plugin -...",
+      "TLDR: Today, we are releasing a new version of our slack bot plugin -...",
     date: "19 Feb 2026 · 4 min read",
     gradient: "from-red-600 to-red-800",
   },
   {
-    category: "ENGINEERING",
-    title: "We added Shramai to Claude Code. It's INSANELY powerful now...",
+    category: "PRODUCT OPS",
+    title: "We added Shramai to Slack Inbox. It's INSANELY powerful now...",
     excerpt:
-      "Today, we are launching the Shramai plugin for Claude Code! TLDR: You can use Shramai...",
+      "Today, we are launching the Shramai plugin for Slack Inbox! TLDR: You can use Shramai...",
     date: "30 Jan 2026 · 4 min read",
     gradient: "from-orange-500 to-orange-600",
   },
   {
     category: "NEWS",
-    title: "Clawd / Molt bot's memory SUCKS. We gave it Shramai.",
+    title: "Zapier / Make bot's memory SUCKS. We gave it Shramai.",
     excerpt:
-      "I'm the founder of Shramai. Clawd/Molt bot is blowing up right now, with many, many use...",
+      "I'm the founder of Shramai. Zapier/Make bot is blowing up right now, with many, many use...",
     date: "28 Jan 2026 · 2 min read",
     gradient: "from-zinc-900 to-zinc-700",
   },
   {
     category: "NEWS",
-    title: "AI's next big thing: personalization and (super)memory.",
+    title: "AI's next big thing: auto-drafting and (super)tracking.",
     excerpt:
-      "You are probably thinking of AI memory in the wrong way. Over the last few years, we've all seen ...",
+      "You are probably thinking of AI drafts in the wrong way. Over the last few years, we've all seen ...",
     date: "24 Jan 2026 · 6 min read",
     gradient: "from-blue-500 to-blue-600",
   },
   {
     category: "NEWS",
     title:
-      "Faster, smarter, reliable infinite chat: Shramai IS context engineering.",
+      "Faster, smarter, reliable infinite sync: Shramai IS context engineering.",
     excerpt:
-      "People are obsessed with prompts and prompt engineering. Sure, what you say is important, but...",
+      "People are obsessed with taskers and taskers engineering. Sure, what you say is important, but...",
     date: "09 Jul 2025 · 4 min read",
     gradient: "from-blue-50 to-white",
   },
   {
-    category: "ENGINEERING",
-    title: "We solved AI API interoperability",
+    category: "PRODUCT OPS",
+    title: "We solved AI App interoperability",
     excerpt:
-      "One API to rule them all, One spec to find them, One library to bring them all and in the TypeScrip...",
+      "One app to rule them all, One spec to find them, One platform to bring them all and in the TypeScrip...",
     date: "07 Jul 2025 · 7 min read",
     gradient: "from-blue-50 to-white",
   },
   {
-    category: "ENGINEERING",
-    title: "2 Approaches For Extending Context Windows in LLMs",
+    category: "PRODUCT OPS",
+    title: "2 Approaches For Extending Context Tracking in CRMs",
     excerpt:
-      "Transformer-based large language models have become the poster boys of modern AI, yet they...",
+      "Integration-based large tracking layers have become the poster boys of modern AI, yet they...",
     date: "04 Jul 2025 · 9 min read",
     gradient: "from-blue-50 to-indigo-50",
   },
@@ -182,7 +182,7 @@ const Blog = () => {
             </h1>
           </div>
           <p className="text-lg text-zinc-500 font-dmmono tracking-tight max-w-2xl mx-auto">
-            How we build Shramai - best memory engine on the planet.
+            How we build Shramai - best tracking tool on the planet.
           </p>
         </div>
 
@@ -315,10 +315,10 @@ const Blog = () => {
                 Product
               </h4>
               <a href="#" className="text-sm text-zinc-600 hover:text-zinc-900">
-                API
+                App
               </a>
               <a href="#" className="text-sm text-zinc-600 hover:text-zinc-900">
-                Plugins
+                Add-ons
               </a>
               <a href="#" className="text-sm text-zinc-600 hover:text-zinc-900">
                 Pricing
@@ -338,7 +338,7 @@ const Blog = () => {
                 Blog
               </a>
               <a href="#" className="text-sm text-zinc-600 hover:text-zinc-900">
-                Benchmarks
+                Case study
               </a>
             </div>
             <div className="flex flex-col gap-4">

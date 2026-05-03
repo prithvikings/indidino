@@ -1,124 +1,203 @@
-import React from 'react';
-import { Navbar } from '../components/Navbar'; // Adjust path if needed
-import Image from 'next/image';
+"use client";
+
+import React, { useState } from "react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "motion/react";
+import {
+  Github01Icon,
+  Linkedin01Icon,
+  NewTwitterRectangleIcon,
+  RedditIcon,
+} from "hugeicons-react";
 
 // --- Data ---
 const pricingPlans = [
   {
-    name: 'FREE',
-    price: '$0',
-    description: 'Get started with basic memory features',
+    name: "TEST",
+    price: "$0",
+    description: "Get started with local tracking folder",
     features: [
-      '1M tokens/month',
-      '10K search queries/month',
-      'Unlimited storage & users',
-      'Free multi-modal extraction',
-      'Email support',
-      'Codex plugin (free)',
+      "1k chats/months",
+      "10k background scans/day",
+      "Unlimited tracks & drafts",
+      "Free multi-thread catchups ",
+      "Basic support",
+      "Slack plugin (free)",
     ],
-    buttonText: 'Get Shram.ai',
+    buttonText: "Get Shram.ai",
     primary: false,
   },
   {
-    name: 'PRO',
-    price: '$19',
-    period: '/mo.',
-    description: 'For developers building with AI memory',
+    name: "PRO",
+    price: "$19",
+    period: "/mo.",
+    description: "For freelancers managing multiple chats",
     features: [
-      '3M tokens/month',
-      '100K search queries/month',
-      'Unlimited storage & users',
-      'Free multi-modal extraction',
-      'Priority support',
-      'All plugins (Claude Code, Cursor, OpenCode, OpenClaw, Codex)',
+      "3k chats/months",
+      "100k background scans/day",
+      "Unlimited tracks & drafts",
+      "Free multi-thread catchups ",
+      "Priority support",
+      "All plugins (WhatsApp, Telegram, Discord, Notion, Linear, X)",
     ],
-    buttonText: 'Get Shram.ai Pro',
+    buttonText: "Get Shram.ai Pro",
     primary: true,
   },
   {
-    name: 'SCALE',
-    price: '$399',
-    period: '/mo.',
-    description: 'For teams and production workloads',
+    name: "TEAMS",
+    price: "$399",
+    period: "/mo.",
+    description: "For agencies and high volume chats",
     features: [
-      '80M tokens/month',
-      '20M search queries/month',
-      'Unlimited storage & users',
-      'Free multi-modal extraction',
-      'Dedicated support',
-      'Gmail, S3, Web Crawler connectors',
+      "80k chats/months",
+      "20m background scans/day",
+      "Unlimited tracks & drafts",
+      "Free multi-thread catchups ",
+      "Dedicated support",
+      "Gmail, Outlook, Zendesk CRM sync",
     ],
-    buttonText: 'Get Shram.ai Scale',
+    buttonText: "Get Shram.ai Teams",
     primary: false,
   },
 ];
 
 const faqs = [
-  "What counts as a token?",
-  "What counts as a search query?",
-  "Can I switch plans at any time?",
-  "What happens if I exceed my plan limits?",
-  "Is there a commitment or contract?",
-  "What plugins are included with Pro?",
+  {
+    q: "What counts as a track?",
+    a: "A track is counted whenever Shram successfully identifies a cold conversation that requires a follow-up or reply. Background monitoring itself does not consume tracks.",
+  },
+  {
+    q: "What counts as a scanned chat?",
+    a: "A scanned chat is a single conversation thread (e.g., a WhatsApp chat, an email chain, or a Slack channel) that Shram reads to maintain context and history.",
+  },
+  {
+    q: "Can I switch plans at any time?",
+    a: "Yes, you can upgrade, downgrade, or cancel your subscription at any time. Changes will be pro-rated and applied to your next billing cycle.",
+  },
+  {
+    q: "What happens if I exceed my chat limits?",
+    a: "If you exceed your plan limits, you will be billed standard overage rates for the extra volume. We will always notify you before you hit your limit.",
+  },
+  {
+    q: "Is there a commitment or contract?",
+    a: "No, all standard plans are month-to-month. You can cancel anytime. Custom Enterprise plans may have annual contracts based on volume.",
+  },
+  {
+    q: "What plugins are included with Pro?",
+    a: "The Pro plan includes all premium integrations out-of-the-box, including WhatsApp, Telegram, Discord, Notion, Linear, X, and priority sync options.",
+  },
 ];
 
 const footerLinks = {
-  Product: ['API', 'Plugins', 'Pricing', 'Changelog'],
-  Resources: ['Documentation', 'Blog', 'Benchmarks'],
-  Company: ['About', 'Careers', 'Privacy', 'Terms'],
+  Product: ["App", "Add-ons", "Pricing", "Changelog"],
+  Resources: ["User Manuals ", "Blog", "Case study"],
+  Company: ["About", "Careers", "Privacy", "Terms"],
 };
 
 // --- Icons ---
 const CheckIcon = ({ className = "w-4 h-4" }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    className={className}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M20 6 9 17l-5-5"></path>
   </svg>
 );
 
 const PlusIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <line x1="12" y1="5" x2="12" y2="19"></line>
     <line x1="5" y1="12" x2="19" y2="12"></line>
   </svg>
 );
 
-
 const Pricing = () => {
+  const [openFaqIndex, setOpenFaqIndex] = useState(null);
+
+  const toggleFaq = (index) => {
+    setOpenFaqIndex(openFaqIndex === index ? null : index);
+  };
+
   return (
     <div className="min-h-screen bg-zinc-50 text-zinc-900 font-sans">
-      <main className="max-w-6xl mx-auto border-t-0 border-x border-zinc-300">
+      <main className="max-w-6xl mx-auto border-t-0 border-x border-zinc-300 max-md:border-x-0">
         {/* --- Hero Section --- */}
-        <section className="py-24 px-6 text-center">
-          <div className="text-xs font-dmmono tracking-widest text-zinc-500 font-medium mb-6 uppercase">Pricing</div>
-          <h1 className="text-5xl md:text-6xl font-heading font-medium tracking-tight mb-6">
-            Simple, transparent pricing.
+        <section className="py-24 px-6 text-center max-md:py-16 max-md:px-4">
+          <div className="text-xs font-dmmono tracking-widest text-zinc-500 font-medium mb-6 uppercase max-md:mb-4">
+            Pricing
+          </div>
+          <h1 className="text-5xl md:text-6xl font-heading font-medium tracking-tight mb-6 max-sm:text-4xl max-sm:leading-tight">
+            Stop forgetting your replies.
           </h1>
-          <p className="text-lg text-zinc-500 max-w-2xl mx-auto mb-10">
-            One pricing structure covers everything — plugins, enterprise features, and API access. No separate bills, no per-product charges.
+          <p className="text-lg text-zinc-500 max-w-2xl mx-auto mb-10 max-sm:text-base max-sm:px-2">
+            One simple subscription covers everything — trackers, drafting
+            agents, and app syncing. No hidden costs, no per-message fees ever.
           </p>
-          
-          <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-zinc-700">
-            <div className="flex items-center gap-2"><CheckIcon className="w-4 h-4 text-emerald-600" /> Unlimited storage</div>
-            <div className="flex items-center gap-2"><CheckIcon className="w-4 h-4 text-emerald-600" /> Unlimited users</div>
-            <div className="flex items-center gap-2"><CheckIcon className="w-4 h-4 text-emerald-600" /> Free multi-modal extraction</div>
-            <div className="text-zinc-400">— in every plan</div>
+
+          <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-zinc-700 max-sm:flex-col max-sm:items-start max-sm:w-fit max-sm:mx-auto max-sm:gap-3">
+            <div className="flex items-center gap-2">
+              <CheckIcon className="w-4 h-4 text-emerald-600" /> Unlimited
+              history
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckIcon className="w-4 h-4 text-emerald-600" /> Unlimited syncs
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckIcon className="w-4 h-4 text-emerald-600" /> Free auto
+              drafting included
+            </div>
+            <div className="text-zinc-400 max-sm:pl-6">— in every plan</div>
           </div>
         </section>
 
         {/* --- Pricing Grid --- */}
         <section className="grid grid-cols-1 md:grid-cols-3 border-t border-zinc-300">
           {pricingPlans.map((plan, index) => (
-            <div key={plan.name} className={`flex flex-col p-8 ${index !== 2 ? 'border-b md:border-b-0 md:border-r border-zinc-300' : ''}`}>
-              <div className="text-xs font-dmmono tracking-widest text-zinc-500 font-medium mb-4 uppercase">{plan.name}</div>
-              <div className="flex items-baseline gap-1 mb-4">
-                <span className="text-5xl font-heading font-medium tracking-tight">{plan.price}</span>
-                {plan.period && <span className="text-zinc-500 font-medium">{plan.period}</span>}
+            <div
+              key={plan.name}
+              className={`flex flex-col p-8 max-md:p-6 ${
+                index !== 2
+                  ? "border-b md:border-b-0 md:border-r border-zinc-300"
+                  : ""
+              }`}
+            >
+              <div className="text-xs font-dmmono tracking-widest text-zinc-500 font-medium mb-4 uppercase">
+                {plan.name}
               </div>
-              <p className="text-sm text-zinc-600 mb-8 min-h-[40px]">{plan.description}</p>
-              
+              <div className="flex items-baseline gap-1 mb-4">
+                <span className="text-5xl font-heading font-medium tracking-tight max-sm:text-4xl">
+                  {plan.price}
+                </span>
+                {plan.period && (
+                  <span className="text-zinc-500 font-medium">
+                    {plan.period}
+                  </span>
+                )}
+              </div>
+              <p className="text-sm text-zinc-600 mb-8 min-h-[40px] max-md:min-h-0 max-md:mb-6">
+                {plan.description}
+              </p>
+
               <ul className="flex-1 space-y-4 mb-8">
                 {plan.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-sm text-zinc-700">
+                  <li
+                    key={idx}
+                    className="flex items-start gap-3 text-sm text-zinc-700"
+                  >
                     <CheckIcon className="w-4 h-4 mt-0.5 shrink-0 text-zinc-900" />
                     <span>{feature}</span>
                   </li>
@@ -126,16 +205,30 @@ const Pricing = () => {
               </ul>
 
               <div className="mt-auto">
-                <button className={`w-full py-2.5 px-4 rounded-sm font-medium transition-colors flex items-center justify-center gap-2 ${
-                  plan.primary 
-                    ? 'bg-zinc-900 text-white hover:bg-zinc-800 shadow-sm' 
-                    : 'border border-zinc-300 bg-white/50 text-zinc-800 hover:bg-zinc-100'
-                }`}>
+                <button
+                  className={`w-full py-2.5 px-4 rounded-sm font-medium transition-colors flex items-center justify-center gap-2 ${
+                    plan.primary
+                      ? "bg-zinc-900 text-white hover:bg-zinc-800 shadow-sm"
+                      : "border border-zinc-300 bg-white/50 text-zinc-800 hover:bg-zinc-100"
+                  }`}
+                >
                   {plan.buttonText}
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M5 12h14"></path>
+                    <path d="m12 5 7 7-7 7"></path>
+                  </svg>
                 </button>
                 <div className="text-center mt-3 text-xs text-zinc-400 hover:text-zinc-600 cursor-pointer transition-colors">
-                  Or get the personal app →
+                  Or try the web demo app →
                 </div>
               </div>
             </div>
@@ -145,14 +238,28 @@ const Pricing = () => {
         {/* --- Enterprise & Overage --- */}
         <section className="grid grid-cols-1 lg:grid-cols-2 border-t border-zinc-300">
           {/* Enterprise Left */}
-          <div className="p-8 lg:border-r border-zinc-300 border-b lg:border-b-0 flex flex-col">
-            <div className="text-xs font-dmmono tracking-widest text-zinc-500 font-medium mb-4 uppercase">ENTERPRISE</div>
-            <h2 className="text-4xl font-heading font-medium tracking-tight mb-4">Custom</h2>
-            <p className="text-sm text-zinc-600 mb-8">Custom deployments with dedicated engineering</p>
-            
-            <ul className="space-y-4 mb-10 flex-1">
-              {['Unlimited tokens', 'Unlimited search queries', 'Forward-deployed engineer', 'Custom integrations & SSO'].map((feature, idx) => (
-                <li key={idx} className="flex items-start gap-3 text-sm text-zinc-700">
+          <div className="p-8 lg:border-r border-zinc-300 border-b lg:border-b-0 flex flex-col max-md:p-6">
+            <div className="text-xs font-dmmono tracking-widest text-zinc-500 font-medium mb-4 uppercase">
+              ENTERPRISE
+            </div>
+            <h2 className="text-4xl font-heading font-medium tracking-tight mb-4 max-sm:text-3xl">
+              Custom
+            </h2>
+            <p className="text-sm text-zinc-600 mb-8 max-md:mb-6">
+              Custom integrations with your internal stack.
+            </p>
+
+            <ul className="space-y-4 mb-10 flex-1 max-md:mb-8">
+              {[
+                "Unlimited tracks",
+                "Unlimited background run",
+                "Dedicated account manager",
+                "Custom integrations & SSO",
+              ].map((feature, idx) => (
+                <li
+                  key={idx}
+                  className="flex items-start gap-3 text-sm text-zinc-700"
+                >
                   <CheckIcon className="w-4 h-4 mt-0.5 shrink-0 text-zinc-900" />
                   <span>{feature}</span>
                 </li>
@@ -161,104 +268,208 @@ const Pricing = () => {
 
             <button className="w-full py-2.5 px-4 border border-zinc-300 bg-white/50 text-zinc-800 hover:bg-zinc-100 transition-colors font-medium rounded-sm flex items-center justify-center gap-2">
               Talk to Founder
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
             </button>
           </div>
 
           {/* Overage Right */}
-          <div className="p-8 flex flex-col justify-between bg-zinc-50/50">
+          <div className="p-8 flex flex-col justify-between bg-zinc-50/50 max-md:p-6">
             <div>
-              <div className="text-xs font-dmmono tracking-widest text-zinc-500 font-medium mb-6 uppercase">OVERAGE • PRO & SCALE</div>
-              <div className="grid grid-cols-2 gap-4 mb-4">
-                <div className="border border-zinc-300 p-4 bg-white">
-                  <div className="text-2xl font-medium tracking-tight">$0.01</div>
-                  <div className="text-xs text-zinc-500 mt-1">per 1,000 tokens</div>
+              <div className="text-xs font-dmmono tracking-widest text-zinc-500 font-medium mb-6 uppercase max-md:mb-4">
+                OVERAGE • PRO & TEAMS
+              </div>
+              <div className="grid grid-cols-2 gap-4 mb-4 max-sm:gap-3">
+                <div className="border border-zinc-300 p-4 bg-white max-sm:p-3">
+                  <div className="text-2xl font-medium tracking-tight max-sm:text-xl">
+                    $0.01
+                  </div>
+                  <div className="text-xs text-zinc-500 mt-1">
+                    per 1,000 tracks
+                  </div>
                 </div>
-                <div className="border border-zinc-300 p-4 bg-white">
-                  <div className="text-2xl font-medium tracking-tight">$0.10</div>
-                  <div className="text-xs text-zinc-500 mt-1">per 1,000 queries</div>
+                <div className="border border-zinc-300 p-4 bg-white max-sm:p-3">
+                  <div className="text-2xl font-medium tracking-tight max-sm:text-xl">
+                    $0.10
+                  </div>
+                  <div className="text-xs text-zinc-500 mt-1">
+                    per 1,000 threads
+                  </div>
                 </div>
               </div>
-              <p className="text-xs text-zinc-500">Only charged when you exceed your plan limits. No surprises.</p>
+              <p className="text-xs text-zinc-500">
+                Only charged when you exceed your plan limits. No surprises.
+              </p>
             </div>
 
             {/* Startup Banner */}
-            <div className="mt-8 border border-zinc-300 bg-zinc-100 p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="mt-8 border border-zinc-300 bg-zinc-100 p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 max-md:p-4 max-md:mt-6">
               <div>
                 <div className="font-medium text-zinc-900">Startup Program</div>
-                <div className="text-xs text-zinc-500 mt-1">$1,000 in credits · Dedicated support · 6 months to build</div>
+                <div className="text-xs text-zinc-500 mt-1">
+                  $1,000 in credits · Dedicated support · 6 months of tracks
+                </div>
               </div>
-              <button className="bg-zinc-900 text-white px-4 py-2 text-sm font-medium hover:bg-zinc-800 transition-colors flex items-center gap-2 shrink-0 rounded-sm">
+              <button className="bg-zinc-900 text-white px-4 py-2 text-sm font-medium hover:bg-zinc-800 transition-colors flex items-center justify-center gap-2 shrink-0 rounded-sm max-sm:w-full">
                 Apply now
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
               </button>
             </div>
           </div>
         </section>
 
         {/* --- FAQs --- */}
-        <section className="py-24 px-6 border-t border-zinc-300 bg-white">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-heading font-medium tracking-tight mb-3">Frequently asked questions</h2>
-            <p className="text-zinc-500">Everything you need to know about our pricing.</p>
+        <section className="py-24 px-6 border-t border-zinc-300 bg-white max-md:py-16 max-md:px-4">
+          <div className="text-center mb-12 max-md:mb-8">
+            <h2 className="text-3xl font-heading font-medium tracking-tight mb-3 max-sm:text-2xl">
+              Frequently asked questions
+            </h2>
+            <p className="text-zinc-500 max-sm:text-sm">
+              Everything you need to know about our pricing.
+            </p>
           </div>
 
           <div className="max-w-3xl mx-auto border-t border-zinc-200">
-            {faqs.map((faq, index) => (
-              <div key={index} className="flex justify-between items-center py-5 border-b border-zinc-200 cursor-pointer group">
-                <span className="text-zinc-700 font-medium group-hover:text-zinc-900 transition-colors">{faq}</span>
-                <span className="text-zinc-400 group-hover:text-zinc-900 transition-colors">
-                  <PlusIcon />
-                </span>
-              </div>
-            ))}
+            {faqs.map((faq, index) => {
+              const isOpen = openFaqIndex === index;
+              return (
+                <div key={index} className="border-b border-zinc-200">
+                  <button
+                    onClick={() => toggleFaq(index)}
+                    className="w-full flex justify-between items-center py-5 cursor-pointer group text-left focus:outline-none max-md:py-4"
+                  >
+                    <span className="text-zinc-700 font-medium group-hover:text-zinc-900 transition-colors max-sm:text-sm max-sm:pr-4">
+                      {faq.q}
+                    </span>
+                    <span
+                      className={`text-zinc-400 group-hover:text-zinc-900 transition-transform duration-300 shrink-0 ${
+                        isOpen ? "rotate-45" : ""
+                      }`}
+                    >
+                      <PlusIcon />
+                    </span>
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="overflow-hidden"
+                      >
+                        <div className="pb-6 text-sm text-zinc-500 leading-relaxed pr-8 max-md:pb-4 max-md:pr-2">
+                          {faq.a}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
           </div>
         </section>
 
         {/* --- Bottom CTA --- */}
-        <section className="py-24 px-6 text-center border-t border-zinc-300 bg-zinc-50">
-          <h2 className="text-3xl font-heading font-medium tracking-tight mb-4">Ready to get started?</h2>
-          <p className="text-zinc-500 mb-8">Start free with 1M tokens. No credit card required.</p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <button className="bg-zinc-900 text-white px-6 py-2.5 rounded-sm font-medium hover:bg-zinc-800 transition-colors flex items-center gap-2 shadow-sm">
-              Start Building
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+        <section className="py-24 px-6 text-center border-t border-zinc-300 bg-zinc-50 max-md:py-16 max-md:px-4">
+          <h2 className="text-3xl font-heading font-medium tracking-tight mb-4 max-sm:text-2xl">
+            Ready to get started?
+          </h2>
+          <p className="text-zinc-500 mb-8 max-sm:text-sm max-md:mb-6">
+            Start free with 1k tracks. No credit card required.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4 max-sm:flex-col max-sm:gap-3 max-w-sm mx-auto">
+            <button className="bg-zinc-900 text-white px-6 py-2.5 rounded-sm font-medium hover:bg-zinc-800 transition-colors flex items-center justify-center gap-2 shadow-sm max-sm:w-full">
+              Start Tracking
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
             </button>
-            <button className="border border-zinc-300 bg-white px-6 py-2.5 rounded-sm text-zinc-800 font-medium hover:bg-zinc-100 transition-colors shadow-sm">
+            <button className="border border-zinc-300 bg-white px-6 py-2.5 rounded-sm text-zinc-800 font-medium hover:bg-zinc-100 transition-colors shadow-sm max-sm:w-full">
               Talk to Sales
             </button>
           </div>
         </section>
 
         {/* --- Footer --- */}
-        <footer className="pt-16 pb-8 px-8 border-t border-zinc-300 bg-white">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+        <footer className="pt-16 pb-8 px-8 border-t border-zinc-300 bg-white max-md:pt-12 max-md:px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16 max-md:gap-y-10 max-md:mb-12">
             {Object.entries(footerLinks).map(([title, links]) => (
               <div key={title}>
-                <h4 className="text-xs font-dmmono tracking-widest text-zinc-900 font-bold mb-4 uppercase">{title}</h4>
+                <h4 className="text-xs font-dmmono tracking-widest text-zinc-900 font-bold mb-4 uppercase">
+                  {title}
+                </h4>
                 <ul className="space-y-3">
-                  {links.map(link => (
+                  {links.map((link) => (
                     <li key={link}>
-                      <a href="#" className="text-sm text-zinc-500 hover:text-zinc-900 transition-colors">{link}</a>
+                      <a
+                        href="#"
+                        className="text-sm text-zinc-500 hover:text-zinc-900 transition-colors"
+                      >
+                        {link}
+                      </a>
                     </li>
                   ))}
                 </ul>
               </div>
             ))}
-            
+
             {/* Social Icons Col */}
             <div>
-              <h4 className="text-xs font-dmmono tracking-widest text-zinc-900 font-bold mb-4 uppercase">CONNECT</h4>
-              <div className="flex items-center gap-4 text-zinc-400">
-                {/* Placeholder simple SVGs for socials */}
-                <div className="hover:text-zinc-900 cursor-pointer transition-colors">𝕏</div>
-                <div className="hover:text-zinc-900 cursor-pointer transition-colors">GH</div>
-                <div className="hover:text-zinc-900 cursor-pointer transition-colors">IN</div>
+              <h4 className="text-xs font-dmmono tracking-widest text-zinc-900 font-bold mb-4 uppercase">
+                CONNECT
+              </h4>
+              <div className="flex items-center gap-2 text-zinc-400">
+                <div className="hover:text-zinc-900 cursor-pointer transition-colors">
+                  <NewTwitterRectangleIcon />
+                </div>
+                <div className="hover:text-zinc-900 cursor-pointer transition-colors">
+                  <Github01Icon />
+                </div>
+                <div className="hover:text-zinc-900 cursor-pointer transition-colors">
+                  <Linkedin01Icon />
+                </div>
+                <div className="hover:text-zinc-900 cursor-pointer transition-colors">
+                  <RedditIcon />
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="pt-8 border-t border-zinc-200 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="pt-8 border-t border-zinc-200 flex flex-col md:flex-row justify-between items-center gap-4 max-md:items-start max-md:pt-6">
             <div className="flex items-center gap-2 text-xl font-heading font-medium">
               <Image src="/logo.png" alt="Logo" width={32} height={32} />
               Shram.ai
@@ -268,7 +479,6 @@ const Pricing = () => {
             </div>
           </div>
         </footer>
-
       </main>
     </div>
   );

@@ -16,15 +16,15 @@ const Features = () => {
       {/* Hero Section */}
       <div className="text-center px-6 pt-24 pb-16 max-w-4xl mx-auto bg-[#FAFAFA]">
         <div className="inline-flex items-center justify-center px-4 py-1.5 mb-6 text-[11px] font-medium tracking-wide text-zinc-600 bg-white border border-zinc-200 rounded-full shadow-sm">
-          Core Capabilities
+          Core Integrations
         </div>
         <h2 className="text-4xl md:text-5xl font-medium text-zinc-900 tracking-tight mb-6 font-space">
-          Everything your agent needs. <br className="hidden md:block" />{" "}
-          Nothing it doesn't.
+          Every background task caught. <br className="hidden md:block" /> Never
+          miss a beat.
         </h2>
         <p className="text-base text-zinc-500 leading-relaxed max-w-2xl mx-auto">
-          We stripped away the bloat to focus on what actually resolves tickets:
-          deep context, reliable integrations, and autonomous execution.
+          We stripped away the menus to focus on what actually finishes threads:
+          chat history, reliable memory checks, and autonomous drafting.
         </p>
       </div>
 
@@ -34,12 +34,12 @@ const Features = () => {
           {/* Left Side: Text Description */}
           <div className="w-full md:w-[45%] p-10 md:p-12 flex flex-col justify-center border-b md:border-b-0 md:border-r border-zinc-200">
             <h3 className="text-2xl font-medium text-zinc-900 mb-4 font-space">
-              Context-Aware Routing
+              Context-Aware Writing
             </h3>
             <p className="text-zinc-500 leading-relaxed text-sm mb-8">
-              Your AI agent doesn't just read the current message. It analyzes
-              the entire customer history, active subscriptions, and past
-              interactions before deciding how to respond or route the ticket.
+              Your Shram AI doesn't just read the current message. It analyzes
+              the entire workflow history, active conversations, and past
+              relationships before deciding how to respond or draft the letter.
             </p>
 
             <div className="space-y-4">
@@ -58,7 +58,7 @@ const Features = () => {
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 </div>
-                Intent classification
+                Message cold tracking
               </div>
               <div className="flex items-center gap-3 text-sm text-zinc-700">
                 <div className="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center text-green-600">
@@ -75,7 +75,7 @@ const Features = () => {
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 </div>
-                Historical sentiment analysis
+                Historical connection tracing
               </div>
               <div className="flex items-center gap-3 text-sm text-zinc-700">
                 <div className="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center text-green-600">
@@ -92,7 +92,7 @@ const Features = () => {
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 </div>
-                Automated tagging
+                Automated routing
               </div>
             </div>
           </div>
@@ -113,7 +113,7 @@ const Features = () => {
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-orange-500"></div>
                   <span className="text-xs font-semibold text-zinc-800 uppercase tracking-wider">
-                    Analyzing Ticket #8842
+                    Tracking Message #8842
                   </span>
                 </div>
                 <span className="text-[10px] text-zinc-400 font-mono">
@@ -126,24 +126,24 @@ const Features = () => {
                 <div className="bg-zinc-50 border border-zinc-100 rounded-lg p-3">
                   <div className="flex justify-between items-center mb-1">
                     <span className="text-xs font-medium text-zinc-600">
-                      Fetch Stripe Data
+                      Fetch Client Chat
                     </span>
                     <span className="text-[10px] text-green-500 font-medium">
                       SUCCESS
                     </span>
                   </div>
                   <div className="text-[10px] text-zinc-400 font-mono">
-                    {"{ plan: 'enterprise', mrr: 1200 }"}
+                    {"{ status: 'ignored', days: 3.50 }"}
                   </div>
                 </div>
 
                 <div className="bg-zinc-50 border border-zinc-100 rounded-lg p-3">
                   <div className="flex justify-between items-center mb-1">
                     <span className="text-xs font-medium text-zinc-600">
-                      Check Similar Issues
+                      Check Drafted Status
                     </span>
                     <span className="text-[10px] text-green-500 font-medium">
-                      FOUND (3)
+                      DRAFT (3)
                     </span>
                   </div>
                   <div className="text-[10px] text-zinc-400 font-mono">
@@ -159,7 +159,7 @@ const Features = () => {
                 <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-3 text-white">
                   <div className="flex justify-between items-center">
                     <span className="text-xs font-medium">
-                      Action: Auto-Resolve
+                      Action: Auto-Drafted
                     </span>
                     <svg
                       width="14"
@@ -201,11 +201,11 @@ const Features = () => {
             </svg>
           </div>
           <h3 className="text-md font-space font-semibold text-zinc-900 mb-3">
-            Multi-source Knowledge
+            Multi-channel Trackers
           </h3>
           <p className="text-zinc-500 leading-relaxed text-sm">
-            Syncs with Zendesk, Notion, Slack, and your internal docs. If the
-            answer exists anywhere in your company, the agent knows it.
+            Syncs with WhatsApp, Calendars, and your internal systems. If the
+            details exist anywhere in your history, the system views it.
           </p>
         </div>
 
@@ -226,11 +226,11 @@ const Features = () => {
             </svg>
           </div>
           <h3 className="text-md font-space font-semibold text-zinc-900 mb-3">
-            Sub-300ms Latency
+            Total Backgrounds
           </h3>
           <p className="text-zinc-500 leading-relaxed text-sm">
-            Custom vector search and hybrid retrieval ensures your agent
-            responds faster than humanly possible, without sacrificing accuracy.
+            Custom memory sweeps and silent execution ensures your drafts
+            surface faster than humanly possible, without sacrificing accuracy.
           </p>
         </div>
 
@@ -257,7 +257,7 @@ const Features = () => {
             Draft & Review Mode
           </h3>
           <p className="text-zinc-500 leading-relaxed text-sm">
-            Not ready for full automation? Set the agent to "Draft" mode to
+            Not ready for full automation? Set the Shram to "Draft" mode to
             prepare responses for your human team to review and send.
           </p>
         </div>

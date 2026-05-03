@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono,DM_Mono,DM_Sans,Space_Grotesk } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  DM_Mono,
+  DM_Sans,
+  Space_Grotesk,
+} from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,23 +20,20 @@ const geistMono = Geist_Mono({
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  weight: ["300","400","500","600","700"],
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-space-grotesk",
 });
 const dmMono = DM_Mono({
   subsets: ["latin"],
-  weight: ["300","400","500"],
+  weight: ["300", "400", "500"],
   variable: "--font-dm-mono",
 });
 
-
 const dmSans = DM_Sans({
   subsets: ["latin"],
-  weight: ["100","200","300","400","500","600","700","800","900"],
-   variable: "--font-dm-sans",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-dm-sans",
 });
-
-
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -47,7 +50,9 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${dmSans.variable} ${dmMono.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col selection:bg-rose-400 selection:text-zinc-900">
+        {children}
+      </body>
     </html>
   );
 }
