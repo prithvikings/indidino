@@ -1,9 +1,8 @@
-import React from 'react';
+import React from "react";
 
 const Hero = () => {
   return (
     <div className="mt-10 border border-b-0 border-zinc-300 max-w-6xl mx-auto bg-zinc-50 pb-16 overflow-hidden">
-      
       {/* Dashed Section */}
       <div className="w-full border-y border-dashed border-zinc-300 mt-16 px-6 flex items-center">
         {/* Announcement Badge */}
@@ -11,14 +10,24 @@ const Hero = () => {
           {/* Left Side: Research */}
           <div className="flex items-center gap-2 px-3 py-1.5 border-r border-zinc-300 text-zinc-700 font-medium">
             <div className="p-1 bg-zinc-800 flex items-center justify-center">
-                <div className='w-1 h-1 bg-zinc-50'></div>
+              <div className="w-1 h-1 bg-zinc-50"></div>
             </div>
             Research
           </div>
           {/* Right Side: Text & Arrow */}
           <div className="flex items-center gap-2 px-3 py-1.5 text-zinc-800">
             <span>#1 on MemoryBench: best in latency, quality, and cost</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-600">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-zinc-600"
+            >
               <path d="M5 12h14"></path>
               <path d="m12 5 7 7-7 7"></path>
             </svg>
@@ -27,21 +36,38 @@ const Hero = () => {
       </div>
 
       {/* Main Hero Content */}
-      <div className='flex flex-col gap-16 items-center justify-center mt-24'>
-        <div className="px-6 flex flex-col justify-between items-center gap-7">
-        
-        <h1 className='text-5xl text-center font-space font-medium max-w-xl'>AI customer support for tech companies</h1>
-        <p className='text-sm font-dmsans text-zinc-600 font-normal max-w-xl text-center'>Parahelp is a team of AI agents that builds and evolves itself to resolve your most complex support tickets end-to-end.</p>
-        <div className='flex items-center gap-2'>
-          <button className='bg-zinc-900 text-zinc-50 hover:bg-zinc-700 text-sm font-medium py-1.5 px-3 rounded-md transition-colors'>
-          Get Access
-        </button>
-        <button className=''>contact us</button>
+      <div className="flex flex-col gap-16 items-center justify-center mt-24 px-6">
+        <div className="flex flex-col justify-between items-center gap-7">
+          <h1 className="text-5xl text-center font-space font-medium max-w-xl">
+            AI customer support for tech companies
+          </h1>
+          <p className="text-sm font-dmsans text-zinc-600 font-normal max-w-xl text-center">
+            Parahelp is a team of AI agents that builds and evolves itself to
+            resolve your most complex support tickets end-to-end.
+          </p>
+          <div className="flex items-center gap-2">
+            <button className="bg-zinc-900 text-zinc-50 hover:bg-zinc-700 text-sm font-medium py-1.5 px-3 rounded-md transition-colors">
+              Get Access
+            </button>
+            <button className="text-sm font-medium py-1.5 px-3 text-zinc-700 hover:text-zinc-900 transition-colors">
+              Contact us
+            </button>
+          </div>
+        </div>
+
+        {/* YouTube Video Demo */}
+        <div className="w-full max-w-4xl h-[500px] bg-zinc-800 rounded-md overflow-hidden shadow-lg border border-zinc-200/50">
+          <iframe
+            width="100%"
+            height="100%"
+            src="https://www.youtube.com/embed/2ZWOaVK6sMk"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          ></iframe>
         </div>
       </div>
-      <div className='w-4xl h-[500px] bg-zinc-800 rounded-md'></div>
-      </div>
-
     </div>
   );
 };
