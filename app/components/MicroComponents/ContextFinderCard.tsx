@@ -2,10 +2,9 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, Variants } from "motion/react";
 import Image from "next/image";
-import { Tick02Icon, WhatsappIcon } from "hugeicons-react";
+import { Tick02Icon } from "hugeicons-react";
 
 export default function ContextFinderCard() {
-  // Arrow portal animation
   const arrowVariants: Variants = {
     rest: { x: 0, y: 0, opacity: 1 },
     hover: {
@@ -20,20 +19,16 @@ export default function ContextFinderCard() {
     },
   };
 
-  // State machine for the loading sequence
   const [step, setStep] = useState(0);
 
   useEffect(() => {
     const delay = step === 4 ? 4000 : 1200;
-
     const timer = setTimeout(() => {
       setStep((prev) => (prev === 4 ? 0 : prev + 1));
     }, delay);
-
     return () => clearTimeout(timer);
   }, [step]);
 
-  // Buttery transition for entering and moving
   const smoothTransition = {
     duration: 0.6,
     ease: "easeInOut" as const,
@@ -43,14 +38,14 @@ export default function ContextFinderCard() {
     <motion.div
       initial="rest"
       whileHover="hover"
-      className="left-card flex-1 bg-[#FAFAFA] border border-zinc-100 rounded-3xl p-8 flex flex-col max-md:p-5 max-md:rounded-2xl"
+      className="left-card flex-1 bg-[#FAFAFA] dark:bg-zinc-900/40 border border-zinc-100 dark:border-zinc-800/60 rounded-3xl p-8 flex flex-col max-md:p-5 max-md:rounded-2xl transition-colors duration-300"
     >
       <div className="flex justify-between items-start mb-4 max-md:mb-3">
-        <h3 className="text-xl font-medium text-zinc-900 max-md:text-lg">
+        <h3 className="text-xl font-medium text-zinc-900 dark:text-zinc-100 transition-colors max-md:text-lg">
           Context finder
         </h3>
 
-        <button className="relative overflow-hidden bg-zinc-100 p-2.5 rounded-full hover:bg-zinc-200 transition-colors text-zinc-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 flex items-center justify-center">
+        <button className="relative overflow-hidden bg-zinc-100 dark:bg-zinc-800 p-2.5 rounded-full hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors text-zinc-600 dark:text-zinc-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 dark:focus-visible:ring-zinc-100 flex items-center justify-center">
           <motion.svg
             variants={arrowVariants}
             width="16"
@@ -67,13 +62,13 @@ export default function ContextFinderCard() {
         </button>
       </div>
 
-      <p className="text-zinc-500 mb-6 text-xs max-md:mb-5">
+      <p className="text-zinc-500 dark:text-zinc-400 mb-6 text-xs max-md:mb-5 transition-colors">
         Watches your activity across all apps to catch missed tasks.
       </p>
 
       {/* Inner Mock UI */}
-      <div className="bg-[#F4F4F5] rounded-2xl p-6 flex-1 flex flex-col relative min-h-[350px] max-md:p-4 max-md:min-h-0">
-        <div className="flex items-center justify-center gap-2 text-xs text-zinc-500 mb-6 max-md:mb-5">
+      <div className="bg-[#F4F4F5] dark:bg-zinc-900/60 rounded-2xl p-6 flex-1 flex flex-col relative min-h-[350px] max-md:p-4 max-md:min-h-0 transition-colors duration-300">
+        <div className="flex items-center justify-center gap-2 text-xs text-zinc-500 dark:text-zinc-400 mb-6 max-md:mb-5 transition-colors">
           <span>Parsing</span>
           <Image
             src="/whats.png"
@@ -86,9 +81,9 @@ export default function ContextFinderCard() {
         </div>
 
         <div className="space-y-4 max-w-sm mx-auto w-full">
-          {/* User message (Static context) */}
-          <div className="bg-white rounded-xl p-2 flex items-center gap-3 shadow-sm border border-zinc-100">
-            <div className="w-6 h-6 bg-zinc-100 rounded-full flex items-center justify-center text-zinc-400 shrink-0">
+          {/* User message */}
+          <div className="bg-white dark:bg-zinc-950 rounded-xl p-2 flex items-center gap-3 shadow-sm border border-zinc-100 dark:border-zinc-800 transition-colors duration-300">
+            <div className="w-6 h-6 bg-zinc-100 dark:bg-zinc-800 rounded-full flex items-center justify-center text-zinc-400 dark:text-zinc-500 shrink-0 transition-colors">
               <svg
                 width="12"
                 height="12"
@@ -101,18 +96,15 @@ export default function ContextFinderCard() {
                 <circle cx="12" cy="7" r="4" />
               </svg>
             </div>
-            <span className="text-xs text-zinc-800 font-medium">
+            <span className="text-xs text-zinc-800 dark:text-zinc-200 font-medium transition-colors">
               Send it by tomorrow
             </span>
           </div>
 
-          {/* Dynamic Status List */}
-          {/* FIX 1: Added h-[130px] to rigidly reserve exact space for 4 list items */}
           <div className="pl-3 space-y-2.5 flex flex-col h-[130px]">
             <AnimatePresence>
               {[0, 1, 2, 3].map((index) => {
                 if (step < index) return null;
-
                 const isCurrentlyLoading = step === index;
 
                 return (
@@ -123,12 +115,13 @@ export default function ContextFinderCard() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, transition: { duration: 0.15 } }}
                     transition={smoothTransition}
-                    className={`flex items-center gap-3 text-xs font-medium min-h-[24px] ${
-                      isCurrentlyLoading ? "text-zinc-500" : "text-zinc-600"
+                    className={`flex items-center gap-3 text-xs font-medium min-h-[24px] transition-colors ${
+                      isCurrentlyLoading
+                        ? "text-zinc-500 dark:text-zinc-400"
+                        : "text-zinc-600 dark:text-zinc-300"
                     }`}
                   >
                     {isCurrentlyLoading ? (
-                      // LOADING STATE (Spinner + Detect)
                       <>
                         <svg
                           width="16"
@@ -137,7 +130,7 @@ export default function ContextFinderCard() {
                           fill="none"
                           stroke="currentColor"
                           strokeWidth="2"
-                          className="animate-spin text-zinc-400 shrink-0"
+                          className="animate-spin text-zinc-400 dark:text-zinc-500 shrink-0"
                           style={{ animationDuration: "1.5s" }}
                         >
                           <path d="M21 12a9 9 0 1 1-6.219-8.56" />
@@ -150,9 +143,8 @@ export default function ContextFinderCard() {
                         </span>
                       </>
                     ) : (
-                      // COMPLETED STATE (Green Tick + Scan memory)
                       <>
-                        <div className="w-4 h-4 rounded-full bg-green-500 flex items-center justify-center shrink-0">
+                        <div className="w-4 h-4 rounded-full bg-green-500 dark:bg-green-600 flex items-center justify-center shrink-0">
                           <Tick02Icon size={14} color="white" strokeWidth={2} />
                         </div>
                         <span>Scan memory</span>
@@ -164,8 +156,7 @@ export default function ContextFinderCard() {
             </AnimatePresence>
           </div>
 
-          {/* Final Output Box (Appears at Step 4) */}
-          {/* FIX 2: Wrapped in h-[96px] to permanently reserve the box's height */}
+          {/* Final Output Box */}
           <div className="w-full h-[96px]">
             <AnimatePresence mode="popLayout">
               {step === 4 && (
@@ -179,9 +170,9 @@ export default function ContextFinderCard() {
                     transition: { duration: 0.15 },
                   }}
                   transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                  className="bg-white rounded-xl p-3 flex items-start gap-3 shadow-sm border border-zinc-100"
+                  className="bg-white dark:bg-zinc-950 rounded-xl p-3 flex items-start gap-3 shadow-sm border border-zinc-100 dark:border-zinc-800 transition-colors duration-300"
                 >
-                  <div className="w-6 h-6 border border-zinc-200 rounded-full flex items-center justify-center text-zinc-400 shrink-0 overflow-hidden relative mt-0.5">
+                  <div className="w-6 h-6 border border-zinc-200 dark:border-zinc-700 rounded-full flex items-center justify-center text-zinc-400 shrink-0 overflow-hidden relative mt-0.5 transition-colors">
                     <Image
                       src="/logo.png"
                       fill
@@ -190,7 +181,7 @@ export default function ContextFinderCard() {
                       sizes="20px"
                     />
                   </div>
-                  <span className="text-xs text-zinc-700 font-medium leading-relaxed">
+                  <span className="text-xs text-zinc-700 dark:text-zinc-300 font-medium leading-relaxed transition-colors">
                     Yes, since your last payment was under 14 days ago (within
                     our refund policy), I've refunded it for you. Let me know if
                     I can help with anything else!
@@ -201,13 +192,12 @@ export default function ContextFinderCard() {
           </div>
         </div>
 
-        {/* Bottom Tabs will now never move, because the content above has fixed reservations */}
         <div className="mt-auto pt-6 flex justify-center gap-6 text-xs w-full">
-          <div className="flex items-center justify-between gap-4 bg-neutral-200 px-3 py-1 border-b-2 border-zinc-900 rounded-md">
-            <button className="cursor-pointer text-zinc-900 font-medium">
+          <div className="flex items-center justify-between gap-4 bg-neutral-200 dark:bg-zinc-800/80 px-3 py-1 border-b-2 border-zinc-900 dark:border-zinc-500 rounded-md transition-colors duration-300">
+            <button className="cursor-pointer text-zinc-900 dark:text-zinc-100 font-medium transition-colors">
               Identified
             </button>
-            <button className="cursor-pointer text-zinc-500 hover:text-zinc-700 transition-colors">
+            <button className="cursor-pointer text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors">
               All tasks
             </button>
           </div>

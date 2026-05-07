@@ -38,7 +38,10 @@ const stackData = [
 
 // Reusable SVG component for the wireframe isometric cube
 const WireframeCube = ({ isActive }: { isActive: boolean }) => {
-  const strokeColor = isActive ? "#16a34a" : "#d4d4d8"; // Green-600 for active, zinc-300 for inactive
+  // Using Tailwind utility classes for strokes allows us to hook directly into dark mode natively
+  const strokeClass = isActive
+    ? "stroke-green-600 dark:stroke-green-500"
+    : "stroke-zinc-300 dark:stroke-zinc-700";
   const strokeWidth = isActive ? "2" : "1";
 
   return (
@@ -53,21 +56,21 @@ const WireframeCube = ({ isActive }: { isActive: boolean }) => {
       {/* Top Face */}
       <path
         d="M70 5 L135 35 L70 65 L5 35 Z"
-        stroke={strokeColor}
+        className={`transition-colors duration-300 ${strokeClass}`}
         strokeWidth={strokeWidth}
         strokeLinejoin="round"
       />
       {/* Left Face */}
       <path
         d="M5 35 L70 65 L70 115 L5 85 Z"
-        stroke={strokeColor}
+        className={`transition-colors duration-300 ${strokeClass}`}
         strokeWidth={strokeWidth}
         strokeLinejoin="round"
       />
       {/* Right Face */}
       <path
         d="M70 65 L135 35 L135 85 L70 115 Z"
-        stroke={strokeColor}
+        className={`transition-colors duration-300 ${strokeClass}`}
         strokeWidth={strokeWidth}
         strokeLinejoin="round"
       />
@@ -75,7 +78,7 @@ const WireframeCube = ({ isActive }: { isActive: boolean }) => {
       {/* Inner Top Face Detail */}
       <path
         d="M70 18 L115 35 L70 52 L25 35 Z"
-        stroke={strokeColor}
+        className={`transition-colors duration-300 ${strokeClass}`}
         strokeWidth={strokeWidth}
         strokeLinejoin="round"
       />
@@ -83,13 +86,13 @@ const WireframeCube = ({ isActive }: { isActive: boolean }) => {
       {/* Vertical dashed lines for left face */}
       <path
         d="M25 45 L25 90"
-        stroke={strokeColor}
+        className={`transition-colors duration-300 ${strokeClass}`}
         strokeWidth={strokeWidth}
         strokeDasharray="2 3"
       />
       <path
         d="M48 55 L48 100"
-        stroke={strokeColor}
+        className={`transition-colors duration-300 ${strokeClass}`}
         strokeWidth={strokeWidth}
         strokeDasharray="2 3"
       />
@@ -97,13 +100,13 @@ const WireframeCube = ({ isActive }: { isActive: boolean }) => {
       {/* Vertical dashed lines for right face */}
       <path
         d="M115 45 L115 90"
-        stroke={strokeColor}
+        className={`transition-colors duration-300 ${strokeClass}`}
         strokeWidth={strokeWidth}
         strokeDasharray="2 3"
       />
       <path
         d="M92 55 L92 100"
-        stroke={strokeColor}
+        className={`transition-colors duration-300 ${strokeClass}`}
         strokeWidth={strokeWidth}
         strokeDasharray="2 3"
       />
@@ -124,13 +127,13 @@ const Whatwedo = () => {
   }, []);
 
   return (
-    <div className="max-w-6xl mx-auto border border-t-0 border-zinc-300 bg-[#FAFAFA] py-20 pb-10 px-6 md:px-12 font-sans relative overflow-hidden max-md:py-12 max-md:pb-8 max-md:px-4 max-md:border-x-0">
+    <div className="max-w-6xl mx-auto border border-t-0 border-zinc-300 dark:border-zinc-800 bg-[#FAFAFA] dark:bg-zinc-950/40 py-20 pb-10 px-6 md:px-12 font-sans relative overflow-hidden max-md:py-12 max-md:pb-8 max-md:px-4 max-md:border-x-0 transition-colors duration-300">
       {/* Main Title Section */}
       <div className="text-center max-w-3xl mx-auto mb-20 relative z-10 max-md:mb-10">
-        <h2 className="text-3xl md:text-4xl font-space font-bold text-zinc-900 tracking-tight mb-4 max-sm:text-2xl max-sm:px-2">
+        <h2 className="text-3xl md:text-4xl font-space font-bold text-zinc-900 dark:text-zinc-50 tracking-tight mb-4 max-sm:text-2xl max-sm:px-2 transition-colors duration-300">
           The ultimate memory autopilot.
         </h2>
-        <p className="text-base text-zinc-500 leading-relaxed max-w-2xl mx-auto max-sm:text-sm max-sm:px-2">
+        <p className="text-base text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-2xl mx-auto max-sm:text-sm max-sm:px-2 transition-colors duration-300">
           Other task managers wait for you to type. Shram watches your apps,
           acting for you. So instead of writing to-do lists, you just let Shram
           do it. Saving time, sanity, and ensuring no conversation ever goes
@@ -143,7 +146,7 @@ const Whatwedo = () => {
         {/* Left Side: Accordion */}
         <div className="w-full lg:w-[55%] flex flex-col">
           {/* Top boundary dashed line */}
-          <div className="border-t border-dashed border-zinc-200" />
+          <div className="border-t border-dashed border-zinc-200 dark:border-zinc-800 transition-colors duration-300" />
 
           {stackData.map((item, index) => {
             const isActive = activeItem === index;
@@ -151,7 +154,7 @@ const Whatwedo = () => {
             return (
               <div
                 key={item.id}
-                className="border-b border-dashed border-zinc-200"
+                className="border-b border-dashed border-zinc-200 dark:border-zinc-800 transition-colors duration-300"
               >
                 {/* Accordion Header */}
                 <button
@@ -162,8 +165,8 @@ const Whatwedo = () => {
                   <div
                     className={`w-7 h-7 shrink-0 rounded-full flex items-center justify-center text-xs font-bold transition-colors duration-300 ${
                       isActive
-                        ? "bg-rose-600 text-white"
-                        : "bg-zinc-100 text-zinc-500 group-hover:bg-zinc-200"
+                        ? "bg-rose-600 text-white dark:bg-rose-700"
+                        : "bg-zinc-100 dark:bg-zinc-900/60 text-zinc-500 dark:text-zinc-500 group-hover:bg-zinc-200 dark:group-hover:bg-zinc-800"
                     }`}
                   >
                     {index + 1}
@@ -173,8 +176,8 @@ const Whatwedo = () => {
                   <span
                     className={`text-[15px] transition-colors duration-300 font-space max-sm:text-sm ${
                       isActive
-                        ? "text-zinc-900 font-bold"
-                        : "text-zinc-500 font-medium group-hover:text-zinc-700"
+                        ? "text-zinc-900 dark:text-zinc-50 font-bold"
+                        : "text-zinc-500 dark:text-zinc-400 font-medium group-hover:text-zinc-700 dark:group-hover:text-zinc-200"
                     }`}
                   >
                     {item.title}
@@ -191,7 +194,7 @@ const Whatwedo = () => {
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <div className="pl-13 pb-6 pr-8 text-[13px] text-zinc-500 leading-relaxed max-md:pb-4 max-md:pr-2">
+                      <div className="pl-13 pb-6 pr-8 text-[13px] text-zinc-500 dark:text-zinc-400 leading-relaxed max-md:pb-4 max-md:pr-2 transition-colors duration-300">
                         {item.content}
                       </div>
                     </motion.div>

@@ -8,6 +8,9 @@ import {
 } from "next/font/google";
 import "./globals.css";
 
+// Import the ThemeProvider we just created
+import { ThemeProvider } from "./components/theme-provider"; // <-- Adjust path if needed
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -48,10 +51,18 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning // <-- IMPORTANT: Prevents next-themes hydration mismatch
       className={`${geistSans.variable} ${geistMono.variable} ${dmSans.variable} ${dmMono.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col selection:bg-rose-400 selection:text-zinc-900">
-        {children}
+      <body className="min-h-full flex flex-col selection:bg-rose-400 selection:text-zinc-900 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50 transition-colors">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

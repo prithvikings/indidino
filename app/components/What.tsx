@@ -6,21 +6,14 @@ import { ArrowRight01Icon } from "hugeicons-react";
 import Image from "next/image";
 
 const What = () => {
-  // 1. Ref for the tall scroll container
   const containerRef = useRef<HTMLDivElement>(null);
-
-  // 2. Track which step is currently active
   const [activeStep, setActiveStep] = useState(1);
 
-  // 3. Track scroll progress specifically within the containerRef
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    // "start center" = starts when top of container hits center of screen
-    // "end center" = ends when bottom of container hits center of screen
     offset: ["start center", "end center"],
   });
 
-  // 4. Map the scroll progress (0 to 1) to the 3 steps
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     if (latest < 0.33) {
       setActiveStep(1);
@@ -31,62 +24,54 @@ const What = () => {
     }
   });
 
-  // Shared buttery transition class for the text crossfades
   const smoothTransition =
     "transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]";
 
   return (
-    <div className="max-w-6xl mx-auto border-x border-t-0 border-b border-zinc-200 bg-white font-sans max-md:border-x-0">
+    <div className="max-w-6xl mx-auto border-x border-t-0 border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 font-sans max-md:border-x-0 transition-colors duration-300">
       {/* Top Header Bar */}
-      <div className="flex justify-between items-center px-8 py-4 border-b border-t-0 border-zinc-200 text-xs font-mono text-zinc-500 tracking-widest uppercase sticky top-[64px] z-45 bg-[#FAFAFA] max-md:px-4 max-md:py-3">
+      <div className="flex justify-between items-center px-8 py-4 border-b border-t-0 border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-500 dark:text-zinc-400 tracking-widest uppercase sticky top-[64px] z-45 bg-[#FAFAFA] dark:bg-zinc-900/50 backdrop-blur-md max-md:px-4 max-md:py-3 transition-colors duration-300">
         <div>WHAT WE DO</div>
         <div>
-          [<span className="text-blue-500">1</span>/4]
+          [<span className="text-blue-500 dark:text-blue-400">1</span>/4]
         </div>
       </div>
 
       <div className="text-center px-6 pt-24 pb-16 max-w-4xl mx-auto max-md:pt-12 max-md:pb-8 max-md:px-4">
-        <div className="flex items-center justify-center gap-1.5 text-sm text-zinc-500 leading-relaxed mb-4 group-hover:underline cursor-pointer w-max mx-auto max-sm:text-xs">
+        <div className="flex items-center justify-center gap-1.5 text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4 group-hover:underline cursor-pointer w-max mx-auto max-sm:text-xs transition-colors duration-300">
           Check out drafting app{" "}
           <ArrowRight01Icon size={18} className="max-sm:w-4 max-sm:h-4" />
         </div>
-        <h2 className="text-4xl font-medium text-zinc-900 tracking-tight mb-4 leading-tight max-sm:text-3xl max-sm:leading-snug max-sm:px-2">
+        <h2 className="text-4xl font-medium text-zinc-900 dark:text-zinc-50 tracking-tight mb-4 leading-tight max-sm:text-3xl max-sm:leading-snug max-sm:px-2 transition-colors duration-300">
           It catches every forgotten text you miss
         </h2>
       </div>
 
-      {/* The Scroll Container: Made artificially tall (250vh) to create scroll distance */}
+      {/* The Scroll Container */}
       <div ref={containerRef} className="relative h-[250vh]">
-        {/* The Sticky Wrapper: Pins the UI to the screen while we scroll through the 250vh */}
+        {/* The Sticky Wrapper */}
         <div className="sticky top-[120px] px-8 pb-24 max-md:px-4 max-md:pb-12 max-md:top-[100px]">
-          <div className="bg-[#FAFAFA] rounded-2xl border border-zinc-100 flex flex-col md:flex-row min-h-[500px] max-md:min-h-0 overflow-hidden">
-            {/* Left Side: Mock UI on Blue Background */}
-            <div className="w-full md:w-[45%] p-6 flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-[#80b1ff] to-[#d6e5ff] max-md:py-10 max-md:p-4">
-              {/* Optional subtle grid overlay */}
-              <div
-                className="absolute inset-0 opacity-20 mix-blend-overlay"
-                style={{
-                  backgroundImage:
-                    "radial-gradient(#ffffff 1px, transparent 1px)",
-                  backgroundSize: "16px 16px",
-                }}
-              ></div>
+          <div className="bg-[#FAFAFA] dark:bg-zinc-900/40 rounded-2xl border border-zinc-100 dark:border-zinc-800/60 flex flex-col md:flex-row min-h-[500px] max-md:min-h-0 overflow-hidden transition-colors duration-300">
+            {/* Left Side: Mock UI on Dynamic Background */}
+            <div className="w-full md:w-[45%] p-6 flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-[#80b1ff] to-[#d6e5ff] dark:from-indigo-950/80 dark:to-slate-900/80 max-md:py-10 max-md:p-4 transition-colors duration-300">
+              {/* Converted inline styles to Tailwind classes for dark mode support */}
+              <div className="absolute inset-0 opacity-20 mix-blend-overlay bg-[size:16px_16px] bg-[image:radial-gradient(#ffffff_1px,transparent_1px)] dark:bg-[image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"></div>
 
               {/* Mock UI Card */}
-              <div className="bg-white rounded-xl shadow-sm w-full max-w-[340px] p-5 relative z-10 font-sans text-sm border border-white/50 max-md:p-4">
-                <h3 className="font-medium text-zinc-900 mb-4 max-md:mb-3">
+              <div className="bg-white dark:bg-zinc-950 rounded-xl shadow-sm w-full max-w-[340px] p-5 relative z-10 font-sans text-sm border border-white/50 dark:border-zinc-800 max-md:p-4 transition-colors duration-300">
+                <h3 className="font-medium text-zinc-900 dark:text-zinc-100 mb-4 max-md:mb-3 transition-colors">
                   Sources
                 </h3>
 
                 <div className="space-y-4 max-md:space-y-3">
                   {/* Knowledge Sources */}
                   <div>
-                    <p className="text-xs text-zinc-600 mb-2">
+                    <p className="text-xs text-zinc-600 dark:text-zinc-400 mb-2 transition-colors">
                       Communication app
                     </p>
                     <div className="space-y-2">
                       {/* Whatsapp */}
-                      <div className="flex items-center justify-between p-2 rounded-lg border border-zinc-200 bg-white hover:bg-zinc-50 transition-colors cursor-pointer text-xs">
+                      <div className="flex items-center justify-between p-2 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800/80 transition-colors cursor-pointer text-xs">
                         <div className="flex items-center gap-2">
                           <Image
                             src="/whats.png"
@@ -95,7 +80,7 @@ const What = () => {
                             height={64}
                             className="w-4 h-4 object-contain shrink-0"
                           />
-                          <span className="font-medium text-zinc-700">
+                          <span className="font-medium text-zinc-700 dark:text-zinc-300 transition-colors">
                             Whatsapp
                           </span>
                         </div>
@@ -113,7 +98,7 @@ const What = () => {
                       </div>
 
                       {/* Gmail */}
-                      <div className="flex items-center justify-between p-2 rounded-lg border border-zinc-200 bg-white hover:bg-zinc-50 transition-colors cursor-pointer text-xs">
+                      <div className="flex items-center justify-between p-2 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800/80 transition-colors cursor-pointer text-xs">
                         <div className="flex items-center gap-2">
                           <Image
                             src="/gmail.webp"
@@ -122,9 +107,9 @@ const What = () => {
                             height={32}
                             className="w-4 h-4 object-contain shrink-0"
                           />
-                          <span className="font-medium text-zinc-700 flex flex-wrap gap-x-1">
+                          <span className="font-medium text-zinc-700 dark:text-zinc-300 flex flex-wrap gap-x-1 transition-colors">
                             Gmail inboxes{" "}
-                            <span className="text-zinc-400 font-normal">
+                            <span className="text-zinc-400 dark:text-zinc-500 font-normal">
                               1432 threads (needs replies)
                             </span>
                           </span>
@@ -143,7 +128,7 @@ const What = () => {
                       </div>
 
                       {/* Google Calendar */}
-                      <div className="flex items-center justify-between p-2 rounded-lg border border-zinc-200 bg-white hover:bg-zinc-50 transition-colors cursor-pointer text-xs">
+                      <div className="flex items-center justify-between p-2 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800/80 transition-colors cursor-pointer text-xs">
                         <div className="flex items-center gap-2">
                           <Image
                             src="/googlecalander.png"
@@ -152,7 +137,7 @@ const What = () => {
                             height={32}
                             className="w-4 h-4 object-contain shrink-0"
                           />
-                          <span className="font-medium text-zinc-700">
+                          <span className="font-medium text-zinc-700 dark:text-zinc-300 transition-colors">
                             Google calendar
                           </span>
                         </div>
@@ -170,7 +155,7 @@ const What = () => {
                       </div>
 
                       {/* Slack */}
-                      <div className="flex items-center justify-between p-2 rounded-lg border border-zinc-200 bg-white hover:bg-zinc-50 transition-colors cursor-pointer text-xs">
+                      <div className="flex items-center justify-between p-2 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800/80 transition-colors cursor-pointer text-xs">
                         <div className="flex items-center gap-2">
                           <Image
                             src="/slack.png"
@@ -179,9 +164,9 @@ const What = () => {
                             height={32}
                             className="w-4 h-4 object-contain shrink-0"
                           />
-                          <span className="font-medium text-zinc-700">
+                          <span className="font-medium text-zinc-700 dark:text-zinc-300 transition-colors">
                             Slack-workspaces{" "}
-                            <span className="text-zinc-400 font-normal">
+                            <span className="text-zinc-400 dark:text-zinc-500 font-normal">
                               251 channels
                             </span>
                           </span>
@@ -199,7 +184,7 @@ const What = () => {
                         </svg>
                       </div>
 
-                      <button className="flex items-center justify-center gap-2 w-full p-2 rounded-lg border border-dashed border-zinc-300 text-zinc-500 hover:text-zinc-700 hover:border-zinc-400 transition-colors text-xs font-medium">
+                      <button className="flex items-center justify-center gap-2 w-full p-2 rounded-lg border border-dashed border-zinc-300 dark:border-zinc-700 text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300 hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors text-xs font-medium">
                         <svg
                           width="12"
                           height="12"
@@ -218,10 +203,12 @@ const What = () => {
 
                   {/* Tools */}
                   <div>
-                    <p className="text-xs text-zinc-600 mb-2">Syncs</p>
+                    <p className="text-xs text-zinc-600 dark:text-zinc-400 mb-2 transition-colors">
+                      Syncs
+                    </p>
                     <div className="space-y-2">
                       {/* Outlook */}
-                      <div className="flex items-center justify-between p-2 rounded-lg border border-zinc-200 bg-white hover:bg-zinc-50 transition-colors cursor-pointer text-xs">
+                      <div className="flex items-center justify-between p-2 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800/80 transition-colors cursor-pointer text-xs">
                         <div className="flex items-center gap-2">
                           <Image
                             src="/outlook.png"
@@ -230,7 +217,7 @@ const What = () => {
                             height={32}
                             className="w-4 h-4 object-contain shrink-0"
                           />
-                          <span className="font-medium text-zinc-700">
+                          <span className="font-medium text-zinc-700 dark:text-zinc-300 transition-colors">
                             Outlook
                           </span>
                         </div>
@@ -248,16 +235,16 @@ const What = () => {
                       </div>
 
                       {/* Notion */}
-                      <div className="flex items-center justify-between p-2 rounded-lg border border-zinc-200 bg-white hover:bg-zinc-50 transition-colors cursor-pointer text-xs">
+                      <div className="flex items-center justify-between p-2 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800/80 transition-colors cursor-pointer text-xs">
                         <div className="flex items-center gap-2">
                           <Image
                             src="/notion.png"
                             alt="Notion"
                             width={32}
                             height={32}
-                            className="w-4 h-4 object-contain shrink-0"
+                            className="w-4 h-4 object-contain shrink-0 dark:invert"
                           />
-                          <span className="font-medium text-zinc-700">
+                          <span className="font-medium text-zinc-700 dark:text-zinc-300 transition-colors">
                             Notion
                           </span>
                         </div>
@@ -274,7 +261,7 @@ const What = () => {
                         </svg>
                       </div>
 
-                      <button className="flex items-center justify-center gap-2 w-full p-2 rounded-lg border border-dashed border-zinc-300 text-zinc-500 hover:text-zinc-700 hover:border-zinc-400 transition-colors text-xs font-medium">
+                      <button className="flex items-center justify-center gap-2 w-full p-2 rounded-lg border border-dashed border-zinc-300 dark:border-zinc-700 text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300 hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors text-xs font-medium">
                         <svg
                           width="12"
                           height="12"
@@ -293,7 +280,7 @@ const What = () => {
                 </div>
 
                 <div className="mt-4 flex justify-end">
-                  <button className="bg-[#18181A] text-white text-xs font-medium px-4 py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-zinc-800 transition-colors max-sm:w-full">
+                  <button className="bg-[#18181A] dark:bg-zinc-100 text-white dark:text-zinc-900 text-xs font-medium px-4 py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-zinc-800 dark:hover:bg-zinc-300 transition-colors max-sm:w-full">
                     <svg
                       width="12"
                       height="12"
@@ -314,25 +301,29 @@ const What = () => {
             </div>
 
             {/* Right Side: Dynamic Text Steps */}
-            <div className="w-full md:w-[55%] p-10 md:p-14 flex flex-col justify-center gap-8 max-md:p-6 max-md:gap-6 bg-white">
+            <div className="w-full md:w-[55%] p-10 md:p-14 flex flex-col justify-center gap-8 max-md:p-6 max-md:gap-6 bg-white dark:bg-zinc-950/50 transition-colors duration-300">
               {/* Step 1 */}
               <div
                 className={`border-b pb-8 max-md:pb-5 ${smoothTransition} ${
                   activeStep === 1
-                    ? "border-zinc-800 opacity-100"
-                    : "border-zinc-200 opacity-40"
+                    ? "border-zinc-800 dark:border-zinc-200 opacity-100"
+                    : "border-zinc-200 dark:border-zinc-800 opacity-40"
                 }`}
               >
                 <h3
                   className={`text-xl md:text-2xl font-medium mb-3 max-md:text-lg max-md:mb-2 ${smoothTransition} ${
-                    activeStep === 1 ? "text-zinc-900" : "text-zinc-400"
+                    activeStep === 1
+                      ? "text-zinc-900 dark:text-zinc-50"
+                      : "text-zinc-400 dark:text-zinc-600"
                   }`}
                 >
                   Step 1: Shram links to your chat apps
                 </h3>
                 <p
                   className={`leading-relaxed text-sm md:text-base ${smoothTransition} ${
-                    activeStep === 1 ? "text-zinc-500" : "text-zinc-400"
+                    activeStep === 1
+                      ? "text-zinc-500 dark:text-zinc-300"
+                      : "text-zinc-400 dark:text-zinc-600"
                   }`}
                 >
                   Link up your daily chat apps and tools, and Shram builds your
@@ -344,20 +335,24 @@ const What = () => {
               <div
                 className={`border-b pb-8 max-md:pb-5 ${smoothTransition} ${
                   activeStep === 2
-                    ? "border-zinc-800 opacity-100"
-                    : "border-zinc-200 opacity-40"
+                    ? "border-zinc-800 dark:border-zinc-200 opacity-100"
+                    : "border-zinc-200 dark:border-zinc-800 opacity-40"
                 }`}
               >
                 <h3
                   className={`text-xl md:text-2xl font-medium mb-3 max-md:text-lg max-md:mb-2 ${smoothTransition} ${
-                    activeStep === 2 ? "text-zinc-900" : "text-zinc-400"
+                    activeStep === 2
+                      ? "text-zinc-900 dark:text-zinc-50"
+                      : "text-zinc-400 dark:text-zinc-600"
                   }`}
                 >
                   Step 2: You forgot to text back.
                 </h3>
                 <p
                   className={`leading-relaxed text-sm md:text-base ${smoothTransition} ${
-                    activeStep === 2 ? "text-zinc-500" : "text-zinc-400"
+                    activeStep === 2
+                      ? "text-zinc-500 dark:text-zinc-300"
+                      : "text-zinc-400 dark:text-zinc-600"
                   }`}
                 >
                   Shram runs silently in the background and notices when a
@@ -373,14 +368,18 @@ const What = () => {
               >
                 <h3
                   className={`text-xl md:text-2xl font-medium mb-3 max-md:text-lg max-md:mb-2 ${smoothTransition} ${
-                    activeStep === 3 ? "text-zinc-900" : "text-zinc-400"
+                    activeStep === 3
+                      ? "text-zinc-900 dark:text-zinc-50"
+                      : "text-zinc-400 dark:text-zinc-600"
                   }`}
                 >
                   Step 3: Shram acts
                 </h3>
                 <p
                   className={`leading-relaxed text-sm md:text-base ${smoothTransition} ${
-                    activeStep === 3 ? "text-zinc-500" : "text-zinc-400"
+                    activeStep === 3
+                      ? "text-zinc-500 dark:text-zinc-300"
+                      : "text-zinc-400 dark:text-zinc-600"
                   }`}
                 >
                   It flags the cold chat and drafts a perfect reply.

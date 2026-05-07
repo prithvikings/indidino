@@ -13,7 +13,7 @@ const XIcon = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="text-zinc-400 shrink-0"
+    className="text-zinc-400 dark:text-zinc-500 shrink-0 transition-colors duration-300"
   >
     <path d="M4 4l16 16" />
     <path d="M4 20L20 4" />
@@ -29,13 +29,13 @@ const TestimonialCard = ({
   date,
   image,
   annotation,
-}) => {
+}: any) => {
   return (
-    <div className="bg-white border border-zinc-200 flex flex-col text-sm break-inside-avoid mb-6 rounded-md shadow-sm">
+    <div className="bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 flex flex-col text-sm break-inside-avoid mb-6 rounded-md shadow-sm transition-colors duration-300">
       {/* Card Header */}
-      <div className="flex items-center justify-between p-4 border-b border-zinc-100">
+      <div className="flex items-center justify-between p-4 border-b border-zinc-100 dark:border-zinc-800/50 transition-colors duration-300">
         <div className="flex items-center gap-3 overflow-hidden">
-          <div className="w-10 h-10 rounded-full bg-zinc-200 overflow-hidden flex-shrink-0">
+          <div className="w-10 h-10 rounded-full bg-zinc-200 dark:bg-zinc-800 overflow-hidden flex-shrink-0 transition-colors duration-300">
             {avatar ? (
               <img
                 src={avatar}
@@ -43,14 +43,16 @@ const TestimonialCard = ({
                 className="w-full h-full object-cover"
               />
             ) : (
-              <div className="w-full h-full bg-gradient-to-br from-zinc-300 to-zinc-400" />
+              <div className="w-full h-full bg-gradient-to-br from-zinc-300 to-zinc-400 dark:from-zinc-700 dark:to-zinc-800 transition-colors duration-300" />
             )}
           </div>
           <div className="min-w-0">
-            <div className="font-medium text-zinc-900 leading-tight truncate">
+            <div className="font-medium text-zinc-900 dark:text-zinc-100 leading-tight truncate transition-colors duration-300">
               {name}
             </div>
-            <div className="text-xs text-zinc-500 truncate">{handle}</div>
+            <div className="text-xs text-zinc-500 dark:text-zinc-400 truncate transition-colors duration-300">
+              {handle}
+            </div>
           </div>
         </div>
         <XIcon />
@@ -58,12 +60,12 @@ const TestimonialCard = ({
 
       {/* Card Body */}
       <div className="p-5 flex flex-col flex-grow max-md:p-4">
-        <p className="text-zinc-700 leading-relaxed whitespace-pre-wrap text-[13px] break-words">
+        <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed whitespace-pre-wrap text-[13px] break-words transition-colors duration-300">
           {text}
         </p>
 
         {image && (
-          <div className="mt-4 rounded-lg overflow-hidden border border-zinc-200 bg-zinc-900 aspect-video relative">
+          <div className="mt-4 rounded-lg overflow-hidden border border-zinc-200 dark:border-zinc-700 bg-zinc-900 aspect-video relative transition-colors duration-300">
             {/* Mock Image Representation */}
             {image === "mobile-mock" && (
               <div className="absolute inset-0 flex flex-col justify-center items-center text-white/50 text-xs p-4">
@@ -105,12 +107,14 @@ const TestimonialCard = ({
           </div>
         )}
 
-        <div className="text-[11px] text-zinc-400 mt-5 max-md:mt-4">{date}</div>
+        <div className="text-[11px] text-zinc-400 dark:text-zinc-500 mt-5 max-md:mt-4 transition-colors duration-300">
+          {date}
+        </div>
       </div>
 
       {/* Optional Blue Annotation */}
       {annotation && (
-        <div className="border-t border-dotted border-blue-200 bg-[#F4F8FF] p-4 text-xs italic text-blue-500 font-medium rounded-b-md">
+        <div className="border-t border-dotted border-blue-200 dark:border-blue-900/50 bg-[#F4F8FF] dark:bg-blue-950/20 p-4 text-xs italic text-blue-500 dark:text-blue-400 font-medium rounded-b-md transition-colors duration-300">
           {annotation}
         </div>
       )}
@@ -119,7 +123,7 @@ const TestimonialCard = ({
 };
 
 const Testimonials = () => {
-  // Testimonial Data mapped to 3 columns to easily render a masonry-style grid
+  // Testimonial Data
   const column1 = [
     {
       name: "Harshil Mathur",
@@ -191,28 +195,27 @@ const Testimonials = () => {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto border border-t-0 border-b-0 border-zinc-200 bg-[#FAFAFA] font-sans flex flex-col max-md:border-x-0">
+    <div className="max-w-6xl mx-auto border border-t-0 border-b-0 border-zinc-200 dark:border-zinc-800 bg-[#FAFAFA] dark:bg-zinc-950/40 font-sans flex flex-col max-md:border-x-0 transition-colors duration-300">
       {/* Top Header Bar */}
-      <div className="flex justify-between items-center px-6 py-4 border-b border-t-0 border-zinc-300 text-xs font-dmmono text-zinc-500 tracking-wider sticky top-[64px] z-10 bg-[#FAFAFA] max-md:px-4 max-md:py-3">
+      <div className="flex justify-between items-center px-6 py-4 border-b border-t-0 border-zinc-300 dark:border-zinc-800 text-xs font-dmmono text-zinc-500 dark:text-zinc-400 tracking-wider sticky top-[64px] z-10 bg-[#FAFAFA] dark:bg-zinc-900/50 backdrop-blur-md max-md:px-4 max-md:py-3 transition-colors duration-300">
         <div>WALL OF LOVE</div>
         <div>
-          [<span className="text-blue-500">4</span>/4]
+          [<span className="text-blue-500 dark:text-blue-400">4</span>/4]
         </div>
       </div>
 
       {/* Hero Section */}
       <div className="text-center px-6 pt-16 pb-10 max-w-3xl mx-auto max-md:pt-12 max-md:pb-8">
-        <h2 className="text-4xl md:text-5xl font-medium text-zinc-900 tracking-tight mb-4 max-sm:text-3xl">
+        <h2 className="text-4xl md:text-5xl font-medium text-zinc-900 dark:text-zinc-50 tracking-tight mb-4 max-sm:text-3xl transition-colors duration-300">
           Builders love us.
         </h2>
-        <p className="text-base text-zinc-500 leading-relaxed max-w-2xl mx-auto max-sm:text-sm">
+        <p className="text-base text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-2xl mx-auto max-sm:text-sm transition-colors duration-300">
           And they never stop talking about the time saved.
         </p>
       </div>
 
       {/* Masonry Grid Area */}
       <div className="px-6 md:px-12 max-md:px-4">
-        {/* Adjusted to 2 cols on tablet to prevent squishing */}
         <div className="grid grid-cols-1 max-lg:grid-cols-2 lg:grid-cols-3 gap-6 max-md:gap-0">
           {/* Column 1 */}
           <div className="flex flex-col">
@@ -238,10 +241,10 @@ const Testimonials = () => {
       </div>
 
       {/* View All Button Area */}
-      <div className="flex justify-center py-10 border-t border-zinc-200 max-md:py-8">
+      <div className="flex justify-center py-10 border-t border-zinc-200 dark:border-zinc-800 max-md:py-8 transition-colors duration-300">
         <a
           href="#"
-          className="text-sm font-medium text-blue-500 hover:text-blue-600 transition-colors inline-flex items-center gap-1"
+          className="text-sm font-medium text-blue-500 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors inline-flex items-center gap-1"
         >
           Read all 24 user reviews
           <svg

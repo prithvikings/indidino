@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 import { motion, AnimatePresence, Variants } from "motion/react";
 import {
   Github01Icon,
@@ -127,6 +128,83 @@ const PlusIcon = () => (
 );
 
 // ==========================================
+// 3.5 THEME TOGGLE BUTTON
+// ==========================================
+// ==========================================
+// 3.5 THEME TOGGLE BUTTON (SWITCH STYLE)
+// ==========================================
+const ThemeToggle = () => {
+  const { theme, setTheme } = useTheme();
+  const isDark = theme === "dark";
+
+  return (
+    <button
+      role="switch"
+      aria-checked={isDark}
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-zinc-100 dark:focus-visible:ring-offset-zinc-950 bg-zinc-200 dark:bg-zinc-700"
+    >
+      <span className="sr-only">Toggle theme</span>
+
+      {/* The sliding "thumb" of the switch */}
+      <span
+        className={`pointer-events-none relative inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out flex items-center justify-center ${
+          isDark ? "translate-x-5" : "translate-x-0"
+        }`}
+      >
+        {/* Sun Icon (Visible when light) */}
+        <span
+          className={`absolute inset-0 flex h-full w-full items-center justify-center transition-opacity duration-200 ease-in ${
+            isDark ? "opacity-0" : "opacity-100"
+          }`}
+          aria-hidden="true"
+        >
+          <svg
+            className="h-3 w-3 text-zinc-400"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2"></path>
+            <path d="M12 20v2"></path>
+            <path d="m4.93 4.93 1.41 1.41"></path>
+            <path d="m17.66 17.66 1.41 1.41"></path>
+            <path d="M2 12h2"></path>
+            <path d="M20 12h2"></path>
+            <path d="m6.34 17.66-1.41 1.41"></path>
+            <path d="m19.07 4.93-1.41 1.41"></path>
+          </svg>
+        </span>
+
+        {/* Moon Icon (Visible when dark) */}
+        <span
+          className={`absolute inset-0 flex h-full w-full items-center justify-center transition-opacity duration-200 ease-in ${
+            isDark ? "opacity-100" : "opacity-0"
+          }`}
+          aria-hidden="true"
+        >
+          <svg
+            className="h-3 w-3 text-zinc-900"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+          </svg>
+        </span>
+      </span>
+    </button>
+  );
+};
+
+// ==========================================
 // 2. SHARED ANIMATION VARIANTS
 // ==========================================
 const staggerContainer: Variants = {
@@ -166,19 +244,19 @@ const HeroSection = () => (
   >
     <motion.div
       variants={fadeUpItem}
-      className="text-xs font-dmmono tracking-widest text-zinc-500 font-medium mb-6 uppercase max-md:mb-4"
+      className="text-xs font-dmmono tracking-widest text-zinc-500 dark:text-zinc-400 font-medium mb-6 uppercase max-md:mb-4 transition-colors duration-300"
     >
       Pricing
     </motion.div>
     <motion.h1
       variants={fadeUpItem}
-      className="text-5xl md:text-6xl font-heading font-medium tracking-tight mb-6 max-sm:text-4xl max-sm:leading-tight"
+      className="text-5xl md:text-6xl font-heading font-medium tracking-tight mb-6 max-sm:text-4xl max-sm:leading-tight text-zinc-900 dark:text-zinc-50 transition-colors duration-300"
     >
       Stop forgetting your replies.
     </motion.h1>
     <motion.p
       variants={fadeUpItem}
-      className="text-lg text-zinc-500 max-w-2xl mx-auto mb-10 max-sm:text-base max-sm:px-2"
+      className="text-lg text-zinc-500 dark:text-zinc-400 max-w-2xl mx-auto mb-10 max-sm:text-base max-sm:px-2 transition-colors duration-300"
     >
       One simple subscription covers everything — trackers, drafting agents, and
       app syncing. No hidden costs, no per-message fees ever.
@@ -186,19 +264,23 @@ const HeroSection = () => (
 
     <motion.div
       variants={fadeUpItem}
-      className="flex flex-wrap justify-center items-center gap-6 text-sm text-zinc-700 max-sm:flex-col max-sm:items-start max-sm:w-fit max-sm:mx-auto max-sm:gap-3"
+      className="flex flex-wrap justify-center items-center gap-6 text-sm text-zinc-700 dark:text-zinc-300 max-sm:flex-col max-sm:items-start max-sm:w-fit max-sm:mx-auto max-sm:gap-3 transition-colors duration-300"
     >
       <div className="flex items-center gap-2">
-        <CheckIcon className="w-4 h-4 text-emerald-600" /> Unlimited history
+        <CheckIcon className="w-4 h-4 text-emerald-600 dark:text-emerald-500 transition-colors duration-300" />{" "}
+        Unlimited history
       </div>
       <div className="flex items-center gap-2">
-        <CheckIcon className="w-4 h-4 text-emerald-600" /> Unlimited syncs
+        <CheckIcon className="w-4 h-4 text-emerald-600 dark:text-emerald-500 transition-colors duration-300" />{" "}
+        Unlimited syncs
       </div>
       <div className="flex items-center gap-2">
-        <CheckIcon className="w-4 h-4 text-emerald-600" /> Free auto drafting
-        included
+        <CheckIcon className="w-4 h-4 text-emerald-600 dark:text-emerald-500 transition-colors duration-300" />{" "}
+        Free auto drafting included
       </div>
-      <div className="text-zinc-400 max-sm:pl-6">— in every plan</div>
+      <div className="text-zinc-400 dark:text-zinc-500 max-sm:pl-6 transition-colors duration-300">
+        — in every plan
+      </div>
     </motion.div>
   </motion.section>
 );
@@ -209,30 +291,32 @@ const PricingGrid = () => (
     initial="hidden"
     whileInView="visible"
     viewport={{ once: true, amount: 0.1 }}
-    className="grid grid-cols-1 md:grid-cols-3 border-t border-zinc-300"
+    className="grid grid-cols-1 md:grid-cols-3 border-t border-zinc-300 dark:border-zinc-800 transition-colors duration-300"
   >
     {pricingPlans.map((plan, index) => (
       <motion.div
         variants={fadeUpItem}
         key={plan.name}
-        className={`flex flex-col p-8 max-md:p-6 ${
+        className={`flex flex-col p-8 max-md:p-6 transition-colors duration-300 ${
           index !== 2
-            ? "border-b md:border-b-0 md:border-r border-zinc-300"
+            ? "border-b md:border-b-0 md:border-r border-zinc-300 dark:border-zinc-800"
             : ""
         }`}
       >
-        <div className="text-xs font-dmmono tracking-widest text-zinc-500 font-medium mb-4 uppercase">
+        <div className="text-xs font-dmmono tracking-widest text-zinc-500 dark:text-zinc-400 font-medium mb-4 uppercase transition-colors duration-300">
           {plan.name}
         </div>
         <div className="flex items-baseline gap-1 mb-4">
-          <span className="text-5xl font-heading font-medium tracking-tight max-sm:text-4xl">
+          <span className="text-5xl font-heading font-medium tracking-tight max-sm:text-4xl text-zinc-900 dark:text-zinc-50 transition-colors duration-300">
             {plan.price}
           </span>
           {plan.period && (
-            <span className="text-zinc-500 font-medium">{plan.period}</span>
+            <span className="text-zinc-500 dark:text-zinc-400 font-medium transition-colors duration-300">
+              {plan.period}
+            </span>
           )}
         </div>
-        <p className="text-sm text-zinc-600 mb-8 min-h-[40px] max-md:min-h-0 max-md:mb-6">
+        <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-8 min-h-[40px] max-md:min-h-0 max-md:mb-6 transition-colors duration-300">
           {plan.description}
         </p>
 
@@ -240,9 +324,9 @@ const PricingGrid = () => (
           {plan.features.map((feature, idx) => (
             <li
               key={idx}
-              className="flex items-start gap-3 text-sm text-zinc-700"
+              className="flex items-start gap-3 text-sm text-zinc-700 dark:text-zinc-300 transition-colors duration-300"
             >
-              <CheckIcon className="w-4 h-4 mt-0.5 shrink-0 text-zinc-900" />
+              <CheckIcon className="w-4 h-4 mt-0.5 shrink-0 text-zinc-900 dark:text-zinc-100 transition-colors duration-300" />
               <span>{feature}</span>
             </li>
           ))}
@@ -250,10 +334,10 @@ const PricingGrid = () => (
 
         <div className="mt-auto">
           <button
-            className={`w-full py-2.5 px-4 rounded-sm font-medium transition-colors flex items-center justify-center gap-2 ${
+            className={`w-full py-2.5 px-4 rounded-sm font-medium transition-colors duration-300 flex items-center justify-center gap-2 ${
               plan.primary
-                ? "bg-zinc-900 text-white hover:bg-zinc-800 shadow-sm"
-                : "border border-zinc-300 bg-white/50 text-zinc-800 hover:bg-zinc-100"
+                ? "bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-300 shadow-sm"
+                : "border border-zinc-300 dark:border-zinc-700 bg-white/50 dark:bg-zinc-800/50 text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800"
             }`}
           >
             {plan.buttonText}
@@ -271,7 +355,7 @@ const PricingGrid = () => (
               <path d="m12 5 7 7-7 7"></path>
             </svg>
           </button>
-          <div className="text-center mt-3 text-xs text-zinc-400 hover:text-zinc-600 cursor-pointer transition-colors">
+          <div className="text-center mt-3 text-xs text-zinc-400 dark:text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 cursor-pointer transition-colors duration-300">
             Or try the web demo app →
           </div>
         </div>
@@ -286,20 +370,20 @@ const EnterpriseSection = () => (
     initial="hidden"
     whileInView="visible"
     viewport={{ once: true, amount: 0.2 }}
-    className="grid grid-cols-1 lg:grid-cols-2 border-t border-zinc-300"
+    className="grid grid-cols-1 lg:grid-cols-2 border-t border-zinc-300 dark:border-zinc-800 transition-colors duration-300"
   >
     {/* Enterprise Left */}
     <motion.div
       variants={fadeUpItem}
-      className="p-8 lg:border-r border-zinc-300 border-b lg:border-b-0 flex flex-col max-md:p-6"
+      className="p-8 lg:border-r border-zinc-300 dark:border-zinc-800 border-b lg:border-b-0 flex flex-col max-md:p-6 transition-colors duration-300"
     >
-      <div className="text-xs font-dmmono tracking-widest text-zinc-500 font-medium mb-4 uppercase">
+      <div className="text-xs font-dmmono tracking-widest text-zinc-500 dark:text-zinc-400 font-medium mb-4 uppercase transition-colors duration-300">
         ENTERPRISE
       </div>
-      <h2 className="text-4xl font-heading font-medium tracking-tight mb-4 max-sm:text-3xl">
+      <h2 className="text-4xl font-heading font-medium tracking-tight mb-4 max-sm:text-3xl text-zinc-900 dark:text-zinc-50 transition-colors duration-300">
         Custom
       </h2>
-      <p className="text-sm text-zinc-600 mb-8 max-md:mb-6">
+      <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-8 max-md:mb-6 transition-colors duration-300">
         Custom integrations with your internal stack.
       </p>
 
@@ -312,15 +396,15 @@ const EnterpriseSection = () => (
         ].map((feature, idx) => (
           <li
             key={idx}
-            className="flex items-start gap-3 text-sm text-zinc-700"
+            className="flex items-start gap-3 text-sm text-zinc-700 dark:text-zinc-300 transition-colors duration-300"
           >
-            <CheckIcon className="w-4 h-4 mt-0.5 shrink-0 text-zinc-900" />
+            <CheckIcon className="w-4 h-4 mt-0.5 shrink-0 text-zinc-900 dark:text-zinc-100 transition-colors duration-300" />
             <span>{feature}</span>
           </li>
         ))}
       </ul>
 
-      <button className="w-full py-2.5 px-4 border border-zinc-300 bg-white/50 text-zinc-800 hover:bg-zinc-100 transition-colors font-medium rounded-sm flex items-center justify-center gap-2">
+      <button className="w-full py-2.5 px-4 border border-zinc-300 dark:border-zinc-700 bg-white/50 dark:bg-zinc-800/50 text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors duration-300 font-medium rounded-sm flex items-center justify-center gap-2">
         Talk to Founder
         <svg
           width="16"
@@ -341,39 +425,45 @@ const EnterpriseSection = () => (
     {/* Overage Right */}
     <motion.div
       variants={fadeUpItem}
-      className="p-8 flex flex-col justify-between bg-zinc-50/50 max-md:p-6"
+      className="p-8 flex flex-col justify-between bg-zinc-50/50 dark:bg-zinc-900/30 max-md:p-6 transition-colors duration-300"
     >
       <div>
-        <div className="text-xs font-dmmono tracking-widest text-zinc-500 font-medium mb-6 uppercase max-md:mb-4">
+        <div className="text-xs font-dmmono tracking-widest text-zinc-500 dark:text-zinc-400 font-medium mb-6 uppercase max-md:mb-4 transition-colors duration-300">
           OVERAGE • PRO & TEAMS
         </div>
         <div className="grid grid-cols-2 gap-4 mb-4 max-sm:gap-3">
-          <div className="border border-zinc-300 p-4 bg-white max-sm:p-3">
-            <div className="text-2xl font-medium tracking-tight max-sm:text-xl">
+          <div className="border border-zinc-300 dark:border-zinc-700 p-4 bg-white dark:bg-zinc-900 max-sm:p-3 transition-colors duration-300">
+            <div className="text-2xl font-medium tracking-tight max-sm:text-xl text-zinc-900 dark:text-zinc-50 transition-colors duration-300">
               $0.01
             </div>
-            <div className="text-xs text-zinc-500 mt-1">per 1,000 tracks</div>
+            <div className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 transition-colors duration-300">
+              per 1,000 tracks
+            </div>
           </div>
-          <div className="border border-zinc-300 p-4 bg-white max-sm:p-3">
-            <div className="text-2xl font-medium tracking-tight max-sm:text-xl">
+          <div className="border border-zinc-300 dark:border-zinc-700 p-4 bg-white dark:bg-zinc-900 max-sm:p-3 transition-colors duration-300">
+            <div className="text-2xl font-medium tracking-tight max-sm:text-xl text-zinc-900 dark:text-zinc-50 transition-colors duration-300">
               $0.10
             </div>
-            <div className="text-xs text-zinc-500 mt-1">per 1,000 threads</div>
+            <div className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 transition-colors duration-300">
+              per 1,000 threads
+            </div>
           </div>
         </div>
-        <p className="text-xs text-zinc-500">
+        <p className="text-xs text-zinc-500 dark:text-zinc-400 transition-colors duration-300">
           Only charged when you exceed your plan limits. No surprises.
         </p>
       </div>
 
-      <div className="mt-8 border border-zinc-300 bg-zinc-100 p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 max-md:p-4 max-md:mt-6">
+      <div className="mt-8 border border-zinc-300 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 max-md:p-4 max-md:mt-6 transition-colors duration-300">
         <div>
-          <div className="font-medium text-zinc-900">Startup Program</div>
-          <div className="text-xs text-zinc-500 mt-1">
+          <div className="font-medium text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
+            Startup Program
+          </div>
+          <div className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 transition-colors duration-300">
             $1,000 in credits · Dedicated support · 6 months of tracks
           </div>
         </div>
-        <button className="bg-zinc-900 text-white px-4 py-2 text-sm font-medium hover:bg-zinc-800 transition-colors flex items-center justify-center gap-2 shrink-0 rounded-sm max-sm:w-full">
+        <button className="bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-4 py-2 text-sm font-medium hover:bg-zinc-800 dark:hover:bg-zinc-300 transition-colors duration-300 flex items-center justify-center gap-2 shrink-0 rounded-sm max-sm:w-full">
           Apply now
           <svg
             width="14"
@@ -407,37 +497,40 @@ const FAQSection = () => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.1 }}
-      className="py-24 px-6 border-t border-zinc-300 bg-white max-md:py-16 max-md:px-4"
+      className="py-24 px-6 border-t border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-950 max-md:py-16 max-md:px-4 transition-colors duration-300"
     >
       <motion.div
         variants={fadeUpItem}
         className="text-center mb-12 max-md:mb-8"
       >
-        <h2 className="text-3xl font-heading font-medium tracking-tight mb-3 max-sm:text-2xl">
+        <h2 className="text-3xl font-heading font-medium tracking-tight mb-3 max-sm:text-2xl text-zinc-900 dark:text-zinc-50 transition-colors duration-300">
           Frequently asked questions
         </h2>
-        <p className="text-zinc-500 max-sm:text-sm">
+        <p className="text-zinc-500 dark:text-zinc-400 max-sm:text-sm transition-colors duration-300">
           Everything you need to know about our pricing.
         </p>
       </motion.div>
 
       <motion.div
         variants={fadeUpItem}
-        className="max-w-3xl mx-auto border-t border-zinc-200"
+        className="max-w-3xl mx-auto border-t border-zinc-200 dark:border-zinc-800 transition-colors duration-300"
       >
         {faqs.map((faq, index) => {
           const isOpen = openFaqIndex === index;
           return (
-            <div key={index} className="border-b border-zinc-200">
+            <div
+              key={index}
+              className="border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-300"
+            >
               <button
                 onClick={() => toggleFaq(index)}
                 className="w-full flex justify-between items-center py-5 cursor-pointer group text-left focus:outline-none max-md:py-4"
               >
-                <span className="text-zinc-700 font-medium group-hover:text-zinc-900 transition-colors max-sm:text-sm max-sm:pr-4">
+                <span className="text-zinc-700 dark:text-zinc-300 font-medium group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors duration-300 max-sm:text-sm max-sm:pr-4">
                   {faq.q}
                 </span>
                 <span
-                  className={`text-zinc-400 group-hover:text-zinc-900 transition-transform duration-300 shrink-0 ${isOpen ? "rotate-45" : ""}`}
+                  className={`text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-all duration-300 shrink-0 ${isOpen ? "rotate-45" : ""}`}
                 >
                   <PlusIcon />
                 </span>
@@ -451,7 +544,7 @@ const FAQSection = () => {
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    <div className="pb-6 text-sm text-zinc-500 leading-relaxed pr-8 max-md:pb-4 max-md:pr-2">
+                    <div className="pb-6 text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed pr-8 max-md:pb-4 max-md:pr-2 transition-colors duration-300">
                       {faq.a}
                     </div>
                   </motion.div>
@@ -471,17 +564,17 @@ const CTASection = () => (
     initial="hidden"
     whileInView="visible"
     viewport={{ once: true, amount: 0.5 }}
-    className="py-24 px-6 text-center border-t border-zinc-300 bg-zinc-50 max-md:py-16 max-md:px-4"
+    className="py-24 px-6 text-center border-t border-zinc-300 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 max-md:py-16 max-md:px-4 transition-colors duration-300"
   >
     <motion.h2
       variants={fadeUpItem}
-      className="text-3xl font-heading font-medium tracking-tight mb-4 max-sm:text-2xl"
+      className="text-3xl font-heading font-medium tracking-tight mb-4 max-sm:text-2xl text-zinc-900 dark:text-zinc-50 transition-colors duration-300"
     >
       Ready to get started?
     </motion.h2>
     <motion.p
       variants={fadeUpItem}
-      className="text-zinc-500 mb-8 max-sm:text-sm max-md:mb-6"
+      className="text-zinc-500 dark:text-zinc-400 mb-8 max-sm:text-sm max-md:mb-6 transition-colors duration-300"
     >
       Start free with 1k tracks. No credit card required.
     </motion.p>
@@ -489,7 +582,7 @@ const CTASection = () => (
       variants={fadeUpItem}
       className="flex flex-wrap justify-center gap-4 max-sm:flex-col max-sm:gap-3 max-w-sm mx-auto"
     >
-      <button className="bg-zinc-900 text-white px-6 py-2.5 rounded-sm font-medium hover:bg-zinc-800 transition-colors flex items-center justify-center gap-2 shadow-sm max-sm:w-full">
+      <button className="bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-6 py-2.5 rounded-sm font-medium hover:bg-zinc-800 dark:hover:bg-zinc-300 transition-colors duration-300 flex items-center justify-center gap-2 shadow-sm max-sm:w-full">
         Start Tracking
         <svg
           width="16"
@@ -505,7 +598,7 @@ const CTASection = () => (
           <path d="m12 5 7 7-7 7"></path>
         </svg>
       </button>
-      <button className="border border-zinc-300 bg-white px-6 py-2.5 rounded-sm text-zinc-800 font-medium hover:bg-zinc-100 transition-colors shadow-sm max-sm:w-full">
+      <button className="border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800/50 px-6 py-2.5 rounded-sm text-zinc-800 dark:text-zinc-200 font-medium hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors duration-300 shadow-sm max-sm:w-full">
         Talk to Sales
       </button>
     </motion.div>
@@ -518,12 +611,12 @@ const FooterSection = () => (
     initial="hidden"
     whileInView="visible"
     viewport={{ once: true, amount: 0.1 }}
-    className="pt-16 pb-8 px-8 border-t border-zinc-300 bg-white max-md:pt-12 max-md:px-6"
+    className="pt-16 pb-8 px-8 border-t border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-950 max-md:pt-12 max-md:px-6 transition-colors duration-300"
   >
     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16 max-md:gap-y-10 max-md:mb-12">
       {Object.entries(footerLinks).map(([title, links]) => (
         <motion.div variants={fadeUpItem} key={title}>
-          <h4 className="text-xs font-dmmono tracking-widest text-zinc-900 font-bold mb-4 uppercase">
+          <h4 className="text-xs font-dmmono tracking-widest text-zinc-900 dark:text-zinc-100 font-bold mb-4 uppercase transition-colors duration-300">
             {title}
           </h4>
           <ul className="space-y-3">
@@ -531,7 +624,7 @@ const FooterSection = () => (
               <li key={link}>
                 <a
                   href="#"
-                  className="text-sm text-zinc-500 hover:text-zinc-900 transition-colors"
+                  className="text-sm text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors duration-300"
                 >
                   {link}
                 </a>
@@ -542,20 +635,20 @@ const FooterSection = () => (
       ))}
 
       <motion.div variants={fadeUpItem}>
-        <h4 className="text-xs font-dmmono tracking-widest text-zinc-900 font-bold mb-4 uppercase">
+        <h4 className="text-xs font-dmmono tracking-widest text-zinc-900 dark:text-zinc-100 font-bold mb-4 uppercase transition-colors duration-300">
           CONNECT
         </h4>
-        <div className="flex items-center gap-2 text-zinc-400">
-          <div className="hover:text-zinc-900 cursor-pointer transition-colors">
+        <div className="flex items-center gap-2 text-zinc-400 dark:text-zinc-500">
+          <div className="hover:text-zinc-900 dark:hover:text-zinc-100 cursor-pointer transition-colors duration-300">
             <NewTwitterRectangleIcon />
           </div>
-          <div className="hover:text-zinc-900 cursor-pointer transition-colors">
+          <div className="hover:text-zinc-900 dark:hover:text-zinc-100 cursor-pointer transition-colors duration-300">
             <Github01Icon />
           </div>
-          <div className="hover:text-zinc-900 cursor-pointer transition-colors">
+          <div className="hover:text-zinc-900 dark:hover:text-zinc-100 cursor-pointer transition-colors duration-300">
             <Linkedin01Icon />
           </div>
-          <div className="hover:text-zinc-900 cursor-pointer transition-colors">
+          <div className="hover:text-zinc-900 dark:hover:text-zinc-100 cursor-pointer transition-colors duration-300">
             <RedditIcon />
           </div>
         </div>
@@ -564,14 +657,17 @@ const FooterSection = () => (
 
     <motion.div
       variants={fadeUpItem}
-      className="pt-8 border-t border-zinc-200 flex flex-col md:flex-row justify-between items-center gap-4 max-md:items-start max-md:pt-6"
+      className="pt-8 border-t border-zinc-200 dark:border-zinc-800 flex flex-col md:flex-row justify-between items-center gap-4 max-md:items-start max-md:pt-6 transition-colors duration-300"
     >
-      <div className="flex items-center gap-2 text-xl font-heading font-medium">
+      <div className="flex items-center gap-2 text-xl font-heading font-medium text-zinc-900 dark:text-zinc-50 transition-colors duration-300">
         <Image src="/logo.png" alt="Logo" width={32} height={32} />
         Shram.ai
       </div>
-      <div className="text-xs text-zinc-500">
-        © 2026 Shram.ai Inc. All rights reserved.
+      <div className="flex items-center gap-6 w-full md:w-auto justify-between md:justify-end">
+        <div className="text-xs text-zinc-500 dark:text-zinc-400 transition-colors duration-300">
+          © 2026 Shram.ai Inc. All rights reserved.
+        </div>
+        <ThemeToggle />
       </div>
     </motion.div>
   </motion.footer>
@@ -582,8 +678,8 @@ const FooterSection = () => (
 // ==========================================
 const Pricing = () => {
   return (
-    <div className="min-h-screen bg-zinc-50 text-zinc-900 font-sans">
-      <main className="max-w-6xl mx-auto border-t-0 border-x border-zinc-300 max-md:border-x-0 overflow-hidden">
+    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50 font-sans transition-colors duration-300">
+      <main className="max-w-6xl mx-auto border-t-0 border-x border-zinc-300 dark:border-zinc-800 max-md:border-x-0 overflow-hidden transition-colors duration-300">
         <HeroSection />
         <PricingGrid />
         <EnterpriseSection />
