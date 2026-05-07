@@ -43,7 +43,7 @@ const AnimatedCube = ({
   index: number;
   isActive: boolean;
 }) => {
-  const springTransition = { type: "spring", stiffness: 300, damping: 25 };
+  const springTransition = { type: "spring" as const, stiffness: 300, damping: 25 };
 
   const getTransformations = () => {
     switch (index % 5) {

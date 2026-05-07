@@ -1,19 +1,59 @@
 import React from "react";
-import Hero from "./components/Hero";
+import dynamic from "next/dynamic";
 import { Navbar } from "./components/Navbar";
+import Hero from "./components/Hero";
 import Divider from "./components/Divider";
-import Whatwedo from "./components/Whatwedo";
-import What from "./components/What";
-import Shift from "./components/Shift";
-import Benchmark from "./components/Benchmark";
-import Enterprise from "./components/Enterprise";
-import Localisation from "./components/Localisation";
-import Testimonials from "./components/Testimonials";
-import Pricing from "./Pricing/page";
+
+const Shift = dynamic(() => import("./components/Shift"));
+const What = dynamic(() => import("./components/What"));
+const Whatwedo = dynamic(() => import("./components/Whatwedo"));
+const Benchmark = dynamic(() => import("./components/Benchmark"));
+const Localisation = dynamic(() => import("./components/Localisation"));
+const Testimonials = dynamic(() => import("./components/Testimonials"));
+const Pricing = dynamic(() => import("./Pricing/page"));
 
 const page = () => {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Shram.ai",
+    "operatingSystem": "Web, Windows, macOS",
+    "applicationCategory": "ProductivityApplication",
+    "description": "Shram quietly monitors your chats and emails and drafts perfect responses instantly.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "ratingCount": "1200"
+    }
+  };
+
+  const orgJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Shram.ai",
+    "url": "https://shram.ai",
+    "logo": "https://shram.ai/logo.png",
+    "sameAs": [
+      "https://twitter.com/shram_ai",
+      "https://github.com/shram-ai"
+    ]
+  };
+
   return (
     <div className="bg-zinc-100 dark:bg-zinc-950 w-full min-h-screen relative pb-24 transition-colors duration-300">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+      />
       <Navbar />
       <Hero />
       <Divider height={16} />

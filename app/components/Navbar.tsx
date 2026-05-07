@@ -52,7 +52,7 @@ export const Navbar = () => {
         <Link href={"/"} className="logo flex items-center gap-2 relative z-50">
           <Image
             src="/logo.png"
-            alt="Logo"
+            alt="Shram.ai Logo"
             width={32}
             height={32}
             className="dark:invert transition-all"

@@ -75,7 +75,7 @@ const What = () => {
                         <div className="flex items-center gap-2">
                           <Image
                             src="/whats.png"
-                            alt="WhatsApp"
+                            alt="WhatsApp Integration - Monitor chats"
                             width={64}
                             height={64}
                             className="w-4 h-4 object-contain shrink-0"
@@ -102,7 +102,7 @@ const What = () => {
                         <div className="flex items-center gap-2">
                           <Image
                             src="/gmail.webp"
-                            alt="Gmail"
+                            alt="Gmail Integration - Scan email threads"
                             width={32}
                             height={32}
                             className="w-4 h-4 object-contain shrink-0"
@@ -132,7 +132,7 @@ const What = () => {
                         <div className="flex items-center gap-2">
                           <Image
                             src="/googlecalander.png"
-                            alt="Google Calendar"
+                            alt="Google Calendar Integration - Sync meetings"
                             width={32}
                             height={32}
                             className="w-4 h-4 object-contain shrink-0"
@@ -159,7 +159,7 @@ const What = () => {
                         <div className="flex items-center gap-2">
                           <Image
                             src="/slack.png"
-                            alt="Slack"
+                            alt="Slack Integration - Monitor workspace channels"
                             width={32}
                             height={32}
                             className="w-4 h-4 object-contain shrink-0"
@@ -212,7 +212,7 @@ const What = () => {
                         <div className="flex items-center gap-2">
                           <Image
                             src="/outlook.png"
-                            alt="Outlook"
+                            alt="Outlook Integration - Sync email and calendar"
                             width={32}
                             height={32}
                             className="w-4 h-4 object-contain shrink-0"
@@ -239,7 +239,7 @@ const What = () => {
                         <div className="flex items-center gap-2">
                           <Image
                             src="/notion.png"
-                            alt="Notion"
+                            alt="Notion Integration - Store knowledge and notes"
                             width={32}
                             height={32}
                             className="w-4 h-4 object-contain shrink-0 dark:invert"

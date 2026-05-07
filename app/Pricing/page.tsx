@@ -713,8 +713,25 @@ const FooterSection = () => (
 // 4. MAIN WRAPPER COMPONENT
 // ==========================================
 const Pricing = () => {
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.a
+      }
+    }))
+  };
+
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50 font-sans transition-colors duration-300">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <main className="max-w-6xl mx-auto border-t-0 border-x border-zinc-300 dark:border-zinc-800 max-md:border-x-0 overflow-hidden transition-colors duration-300">
         <HeroSection />
         <PricingGrid />

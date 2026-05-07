@@ -3,7 +3,7 @@
 import React from "react";
 
 // Reusable SVG Cube for the design system aesthetic
-const WireframeCube = ({ className }) => (
+const WireframeCube = ({ className }: { className?: string }) => (
   <svg
     width="120"
     height="120"

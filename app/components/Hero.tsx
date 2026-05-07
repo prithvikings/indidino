@@ -44,11 +44,12 @@ const Hero = () => {
           <div className="inline-flex items-center text-sm bg-zinc-200/60 dark:bg-zinc-800/40 border border-y-0 border-zinc-300 dark:border-zinc-700/50 transition-colors hover:bg-zinc-200 dark:hover:bg-zinc-800/60 cursor-pointer max-sm:flex-col max-sm:w-full max-sm:items-start max-sm:text-left">
             <div className="flex items-center gap-2 px-3 py-1.5 border-r border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 font-medium max-sm:border-r-0 max-sm:border-b max-sm:w-full">
               <Image
-                src={"/logo.png"}
-                alt="logo"
+                src="/logo.png"
+                alt="Shram.ai Logo - AI Autopilot"
                 width={20}
                 height={20}
                 className="object-cover dark:invert"
+                priority
               />
               Autopilot
             </div>
@@ -124,6 +125,7 @@ const Hero = () => {
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
+              loading="lazy"
             ></iframe>
           </motion.div>
         </div>
