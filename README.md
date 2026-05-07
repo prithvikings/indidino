@@ -73,4 +73,4 @@ Shram.ai follows a strict **"Buttery Smooth"** aesthetic:
 
 ---
 
-Built with ❤️ by the Shram.ai Team.
+Built with ❤️ by the Prithvi Raj.
